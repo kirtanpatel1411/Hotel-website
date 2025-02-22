@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         /* Booking Table */
         .bookings-container {
-            max-width: 800px;
+            max-width: 815px;
             margin: 128px 150px;
             background-color: #fff;
             padding: 20px;

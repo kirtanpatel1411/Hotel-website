@@ -73,7 +73,7 @@ if (!$booking) {
       .payment-details p {
          font-size: 20px;
          margin-bottom: 10px;
-         margin-top: 15px;
+         margin-top: 10px;
          display: flex;
          justify-content: space-between;
          padding: 8px 0;
@@ -93,6 +93,11 @@ if (!$booking) {
 
       .btn:hover {
          background-color: #8A5410;
+      }
+      .btndiv{
+         display: flex;
+         justify-content: center;
+
       }
    </style>
 </head>
@@ -125,7 +130,10 @@ if (!$booking) {
    <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
    <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
    <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
-   <button type="submit" class="btn" style="margin-top: 10px;">Generate Bill</button>
+   <div class="btndiv">
+
+      <button type="submit" class="btn">Save</button>
+   </div>
 </form>
 
 
