@@ -159,7 +159,7 @@ include 'sidebar.php';
 
 
 
-    <!-- <script>
+     <!-- <script>
      function loadContent(page, event) {
     event.preventDefault(); // Prevent default link behavior
 
@@ -186,17 +186,17 @@ include 'sidebar.php';
         .catch(error => {
             contentDiv.innerHTML = `<h1>Error Loading Page</h1><p>${error.message}</p>`;
         });
-}
+} -->
+<script>
 
-
-        // Logout function
+        //Logout function
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
                 sessionStorage.clear();
                 window.location.href = 'login.php';
             }
         }
-    </script> -->
+    </script> 
 </body>
 
 </html>
