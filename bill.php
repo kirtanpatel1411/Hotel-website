@@ -45,25 +45,90 @@ $booking = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Invoice</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f8f8; padding: 15px; }
-        .invoice-container { background-color: white; max-width: 700px; margin: auto; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 3px solid black; }
-        .header { text-align: center; margin-bottom: 15px; }
-        .header img { max-width: 200px; display: flex; justify-content: flex-start; }
-        .header h1 { font-size: 24px; color: #A66914; }
-        .header p { font-size: 14px; color: #666; }
-        .details-container div { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #ddd; }
-        .table-container { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .table-container th, .table-container td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        .table-container th { background-color: #A66914; color: white; }
-        .total { text-align: right; font-size: 18px; margin-top: 10px; }
-        .btn-print button { background-color: #A66914; color: white; padding: 10px 20px; cursor: pointer; font-size: 16px; border-radius: 5px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 15px;
+        }
+
+        .invoice-container {
+            background-color: white;
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 3px solid black;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .header img {
+            max-width: 200px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #A66914;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .details-container div {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-container {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .table-container th,
+        .table-container td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table-container th {
+            background-color: #A66914;
+            color: white;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .btn-print button {
+            background-color: #A66914;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
     </style>
 </head>
+
 <body>
     <div class="invoice-container">
         <div class="header">
@@ -120,4 +185,5 @@ $booking = $result->fetch_assoc();
         </div>
     </div>
 </body>
+
 </html>
