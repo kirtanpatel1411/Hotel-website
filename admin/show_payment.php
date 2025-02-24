@@ -100,7 +100,7 @@ a:hover {
             <th>Amount</th>
             <th>Payment Method</th>
             <th>Status</th>
-            <th>Action</th>
+            <!-- <th>Action</th> -->
         </tr>
         <?php while ($row = $result->fetch_assoc()) { ?>
         <tr>
@@ -110,7 +110,7 @@ a:hover {
             <td><?php echo $row['amount']; ?></td>
             <td><?php echo $row['payment_method']; ?></td>
             <td><?php echo $row['payment_status']; ?></td>
-            <td><a href="update_payment.php?id=<?php echo $row['id']; ?>">Update</a></td>
+            <!-- <td><a href="update_payment.php?id=<?php echo $row['id']; ?>">Update</a></td> -->
         </tr>
         <?php } ?>
     </table>
