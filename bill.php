@@ -174,11 +174,11 @@ $booking = $result->fetch_assoc();
             </tr>
             <tr>
                 <td><strong>Total Amount</strong></td>
-                <td><strong>₹<?= number_format($total_price, 2); ?></strong></td>
+                <td><strong>₹<?= number_format($booking['total_price'] * 1.05, 2); ?></strong></td>
             </tr>
         </table>
 
-        <p class="total"><strong>Grand Total: ₹<?= number_format($total_price, 2); ?></strong></p>
+        <p class="total"><strong>Grand Total: ₹<?= number_format($booking['total_price'] * 1.05,2); ?></strong></p>
 
         <div class="btn-print">
             <button onclick="window.print()">Print Invoice</button>

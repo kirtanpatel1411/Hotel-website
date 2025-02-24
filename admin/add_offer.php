@@ -197,7 +197,7 @@ td {
                 <td><?php echo htmlspecialchars($row['id']); ?></td>
                 <td><?php echo htmlspecialchars($row['title']); ?></td>
                 <td><?php echo htmlspecialchars($row['description']); ?></td>
-                <td><?php echo htmlspecialchars($row['discount_percentage']); ?>%</td>
+                <td style="color: red;"><?php echo htmlspecialchars($row['discount_percentage']); ?>%</td>
                 <td>
                     <a href="?delete=<?php echo $row['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</a>
                 </td>

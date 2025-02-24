@@ -266,7 +266,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td><?php echo htmlspecialchars($row['room_name']); ?></td>
                     <td><?php echo htmlspecialchars($row['check_in']); ?></td>
                     <td><?php echo htmlspecialchars($row['check_out']); ?></td>
-                    <td>₹<?php echo number_format($row['total_price'], 2); ?></td>
+                    <td>₹<?php echo number_format($row['total_price'] * 1.05, 2); ?></td>
                     <td class="status <?php echo strtolower($row['status']); ?>">
                         <?php echo ucfirst($row['status']); ?>
                     </td>

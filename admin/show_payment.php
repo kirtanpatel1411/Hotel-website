@@ -96,6 +96,7 @@ a:hover {
         <tr>
             <th>ID</th>
             <th>Booking ID</th>
+            <th>Payment ID</th>
             <th>Customer Name</th>
             <th>Amount</th>
             <th>Payment Method</th>
@@ -106,10 +107,11 @@ a:hover {
         <tr>
             <td><?php echo $row['id']; ?></td>
             <td><?php echo $row['booking_id']; ?></td>
+            <td><?php echo $row['payment_id']; ?></td>
             <td><?php echo $row['customer_name']; ?></td>
             <td><?php echo $row['amount']; ?></td>
             <td><?php echo $row['payment_method']; ?></td>
-            <td><?php echo $row['payment_status']; ?></td>
+            <td style="color:limegreen"><?php echo $row['payment_status']; ?></td>
             <!-- <td><a href="update_payment.php?id=<?php echo $row['id']; ?>">Update</a></td> -->
         </tr>
         <?php } ?>
