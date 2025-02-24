@@ -525,10 +525,10 @@ $result = $conn->query($sql);
    </div>
 
    <div class="share">
-      <a href="#" class="fab fa-facebook-f"></a>
-      <a href="#" class="fab fa-instagram"></a>
-      <a href="#" class="fab fa-twitter"></a>
-      <a href="#" class="fab fa-pinterest"></a>
+      <a href="https://www.facebook.com/Courtyardsurat/" class="fab fa-facebook-f"></a>
+      <a href="https://www.instagram.com/courtyardmarriottsurat/" class="fab fa-instagram"></a>
+      <!-- <a href="#" class="fab fa-twitter"></a> -->
+      <a href="https://in.pinterest.com/pin/880664902127439501/" class="fab fa-pinterest"></a>
    </div>
 
    <div class="credit">&copy; copyright @ 2025 by <span style="color:black">courtyard</span></div>
