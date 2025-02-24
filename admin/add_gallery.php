@@ -58,13 +58,7 @@ $result = $conn->query("SELECT * FROM gallery");
         }
 
 
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            height: 100%;
-            background: #343A40;
 
-        }
 
         .container {
             margin-left: 260px;
@@ -133,6 +127,8 @@ $result = $conn->query("SELECT * FROM gallery");
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
+            margin-top: 30PX;
+
         }
 
 
@@ -213,25 +209,25 @@ $result = $conn->query("SELECT * FROM gallery");
             <input type="file" name="image" required>
             <button type="submit">Upload</button>
         </form>
-    </div>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Image</th>
-            <th>Action</th>
-
-        </tr>
-        <?php while ($row = $result->fetch_assoc()) { ?>
+        <table>
             <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><img src="../<?php echo $row['image']; ?>" width="100"></td>
-                <td>
-                    <a href="add_gallery.php?delete=<?php echo $row['id']; ?>" class="delete-btn">Delete</a>
-                </td>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Action</th>
+
             </tr>
-        <?php } ?>
-    </table>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><img src="../<?php echo $row['image']; ?>" width="100"></td>
+                    <td>
+                        <a href="add_gallery.php?delete=<?php echo $row['id']; ?>" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
 </body>
 
 </html>

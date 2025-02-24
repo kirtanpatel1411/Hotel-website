@@ -44,6 +44,7 @@ $result = $conn->query("SELECT * FROM booking");
         .table-container {
             margin-top: 30px;
             overflow-x: auto;
+            width: 80%;
         }
 
 
