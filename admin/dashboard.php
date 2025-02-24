@@ -1,6 +1,6 @@
 <?php
 include 'sidebar.php';
-include '../db.php'; 
+include '../db.php';
 
 
 $userQuery = "SELECT COUNT(*) as totalUsers FROM users";
@@ -32,7 +32,7 @@ $totaloffer = $offerData['totaloffer'];
 $paymentQuery = "SELECT SUM(amount) as totalPayments FROM payments WHERE payment_status = 'Completed'";
 $paymentResult = $conn->query($paymentQuery);
 $paymentData = $paymentResult->fetch_assoc();
-$totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] : 0; 
+$totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] : 0;
 
 ?>
 
@@ -44,7 +44,6 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-
         .main-content {
             margin-left: 250px;
             padding: 30px;
@@ -58,7 +57,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
             font-size: 24px;
         }
 
-  
+
         .stats-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -76,9 +75,9 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
-         
+
             display: block;
-          
+
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -95,19 +94,11 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
 
         .logout {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 4px;
+            top: 10px;
+            right: 10px;
+
             cursor: pointer;
             transition: background 0.3s;
-        }
-
-        .logout:hover {
-            background: #c0392b;
         }
     </style>
 </head>
@@ -142,7 +133,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
                 <p style="color:green">₹<?php echo number_format($totalPayments, 2); ?></p>
             </a>
         </div>
-        <button class="logout" onclick="logout()">Logout</button>
+        <img src="../images/power.png" style="height: 50px;" onclick="logout()" class="logout"></img>
     </div>
 
     <script>
