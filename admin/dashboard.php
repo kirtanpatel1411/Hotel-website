@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'sidebar.php';
 include '../db.php'; // Database connection file
 
@@ -41,6 +41,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,30 +63,32 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
 
         /* Stats Cards Styling */
         .stats-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-.card {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    color: #A66914;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none; /* Removes underline */
-    display: block; /* Makes entire card clickable */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            color: #A66914;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            /* Removes underline */
+            display: block;
+            /* Makes entire card clickable */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
 
         .card p {
             font-size: 28px;
@@ -111,6 +114,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
         }
     </style>
 </head>
+
 <body>
 
     <div class="main-content">
@@ -119,27 +123,27 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
             <a href="manage_user.php" class="card">
                 <h3><img src="../images/profile.png" style="height: 50px;" alt="user"></h3>
                 <p><?php echo $totalUsers; ?></p>
-    </a>
+            </a>
             <a href="manage_order.php" class="card">
-                <h3><img src="../images/booking.png"  style="height: 50px;"alt="order"></h3>
+                <h3><img src="../images/booking.png" style="height: 50px;" alt="order"></h3>
                 <p><?php echo $totalOrders; ?></p>
-    </a>
+            </a>
             <a href="add_room.php" class="card">
-                <h3><img src="../images/hotel.png"  style="height: 50px;"alt="room"></h3>
+                <h3><img src="../images/hotel.png" style="height: 50px;" alt="room"></h3>
                 <p><?php echo $totalRooms; ?></p>
-    </a>
+            </a>
             <a href="show_feedback.php" class="card">
-                <h3><img src="../images/feedback.png"  style="height: 50px;"alt="feedback"></h3>
+                <h3><img src="../images/feedback.png" style="height: 50px;" alt="feedback"></h3>
                 <p><?php echo $totalFeedback; ?></p>
-    </a>
+            </a>
             <a href="add_offer.php" class="card">
-                <h3><img src="../images/offer.png"  style="height: 50px;"alt="offer"></h3>
+                <h3><img src="../images/offer.png" style="height: 50px;" alt="offer"></h3>
                 <p><?php echo $totaloffer; ?></p>
-    </a>
+            </a>
             <a href="show_payment.php" class="card">
-                <h3><img src="../images/wallet.png"  style="height: 50px;"alt="payment"></h3>
+                <h3><img src="../images/wallet.png" style="height: 50px;" alt="payment"></h3>
                 <p style="color:green">₹<?php echo number_format($totalPayments, 2); ?></p>
-    </a>
+            </a>
         </div>
         <button class="logout" onclick="logout()">Logout</button>
     </div>
@@ -151,7 +155,8 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
                 window.location.href = 'login.php';
             }
         }
-    </script> 
+    </script>
 
 </body>
+
 </html>
