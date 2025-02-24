@@ -51,17 +51,17 @@ $offers = $conn->query("SELECT * FROM offers ORDER BY id DESC");
             margin-left: 270px;
             width: calc(100% - 270px);
             padding: 20px;
-
+            background-color: #F8F9FA;
         }
 
 
         h1,
         h2 {
-            color: #A66914;
+            color: #343A40;
             text-align: center;
             margin-bottom: 20px;
+            font-weight: bold;
         }
-
 
         form {
             background: white;
@@ -70,92 +70,98 @@ $offers = $conn->query("SELECT * FROM offers ORDER BY id DESC");
             padding: 55px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E0E0E0;
         }
 
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            background: #A66914;
-            color: white;
-            padding: 12px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #8A5410;
-        }
-
-
-        table {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        th {
-            background: #A66914;
-            color: white;
-            font-size: 16px;
-        }
-
-        td {
-            font-size: 15px;
-        }
-
-
-        .delete-btn {
-            background: red;
-            color: white;
-            padding: 6px 12px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .delete-btn:hover {
-            background: darkred;
-        }
-
-
-        @media screen and (max-width: 768px) {
-            .sidebar {
+            input,
+            textarea {
                 width: 100%;
-                height: auto;
-                position: relative;
+                padding: 12px;
+                margin: 10px 0;
+                border: 1px solid #CED4DA;
+                border-radius: 5px;
+                font-size: 16px;
+                background-color: #FFF;
+                color: #495057;
             }
 
-            .main-content {
-                margin-left: 0;
+
+            button {
                 width: 100%;
+                background: #343A40;
+                color: white;
+                padding: 12px;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+                font-size: 16px;
+                transition: 0.3s;
             }
+
+
+
 
             table {
-                width: 100%;
+                width: 90%;
+                margin: 20px auto;
+                border-collapse: collapse;
+                background: white;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                overflow: hidden;
             }
-        }
+
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: center;
+            }
+
+            th {
+                background: #343A40;
+                color: white;
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+
+            td {
+                font-size: 15px;
+                color: #333;
+            }
+
+
+            .delete-btn {
+                background: #DC3545;
+                color: white;
+                padding: 6px 12px;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 14px;
+                transition: 0.3s;
+            }
+
+            .delete-btn:hover {
+                background: #C82333;
+            }
+
+
+            @media screen and (max-width: 768px) {
+                .sidebar {
+                    width: 100%;
+                    height: auto;
+                    position: relative;
+                }
+
+                .main-content {
+                    margin-left: 0;
+                    width: 100%;
+                }
+
+                table {
+                    width: 100%;
+                }
+            }
     </style>
 </head>
 

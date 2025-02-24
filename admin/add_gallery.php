@@ -62,7 +62,7 @@ $result = $conn->query("SELECT * FROM gallery");
             width: 250px;
             position: fixed;
             height: 100%;
-            background: #A66914;
+            background: #343A40;
 
         }
 
@@ -77,7 +77,7 @@ $result = $conn->query("SELECT * FROM gallery");
 
 
         h2 {
-            color: #A66914;
+            color: black;
             font-size: 26px;
             margin-bottom: 20px;
         }
@@ -100,7 +100,7 @@ $result = $conn->query("SELECT * FROM gallery");
 
         input[type="file"] {
             padding: 10px;
-            border: 2px solid #A66914;
+            border: 2px solid #343A40;
             border-radius: 6px;
             width: 80%;
             background: white;
@@ -110,8 +110,8 @@ $result = $conn->query("SELECT * FROM gallery");
 
         button {
             width: 80%;
-            background-color: #A66914;
-            color: white;
+            background-color: #343A40;
+            color: #F8F9FA;
             padding: 12px;
             border: none;
             cursor: pointer;
@@ -121,7 +121,7 @@ $result = $conn->query("SELECT * FROM gallery");
         }
 
         button:hover {
-            background-color: #8D5A0D;
+            background-color: #343A40;
         }
 
 
@@ -137,8 +137,8 @@ $result = $conn->query("SELECT * FROM gallery");
 
 
         th {
-            background-color: #A66914;
-            color: white;
+            background-color: #343A40;
+            color: #F8F9FA;
             padding: 12px;
             font-size: 16px;
             text-transform: uppercase;
@@ -149,7 +149,7 @@ $result = $conn->query("SELECT * FROM gallery");
             padding: 12px;
             border-bottom: 1px solid #ddd;
             font-size: 14px;
-            color: #333;
+            color: black;
             text-align: center;
         }
 
@@ -168,7 +168,7 @@ $result = $conn->query("SELECT * FROM gallery");
         .delete-btn {
             display: inline-block;
             background: #e74c3c;
-            color: white;
+            color: #F8F9FA;
             padding: 8px 14px;
             border-radius: 5px;
             text-decoration: none;

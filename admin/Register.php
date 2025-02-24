@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         h2 {
-            color: #A66914;
+            color: #343A40;
         }
 
         input {
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         button {
-            background-color: #A66914;
+            background-color: #343A40;
             color: white;
             padding: 10px;
             border: none;
@@ -71,12 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #8b5510;
-        }
+
 
         p a {
-            color: #A66914;
+            color: red;
             text-decoration: none;
         }
 

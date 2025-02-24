@@ -16,7 +16,7 @@
         .sidebar {
             width: 250px;
             height: 100vh;
-            background-color: #A66914;
+            background-color: #343A40;
             position: fixed;
             left: 0;
             top: 0;
@@ -26,7 +26,7 @@
         }
 
         .sidebar h2 {
-            color: #fff;
+            color: #F8F9FA;
             text-align: center;
             margin-bottom: 20px;
             font-size: 22px;
@@ -40,7 +40,7 @@
 
         .sidebar ul li {
             padding: 15px 20px;
-            color: #fff;
+            color: #F8F9FA;
             font-size: 16px;
             cursor: pointer;
             transition: background 0.3s;
@@ -48,7 +48,7 @@
 
         .sidebar ul li:hover,
         .sidebar ul li.active {
-            background-color: #8A5410;
+            background-color: #A66914;
         }
     </style>
 </head>

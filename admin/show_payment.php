@@ -15,14 +15,16 @@ $result = $conn->query($sql);
             margin-left: 270px;
             width: calc(100% - 270px);
             padding: 20px;
-            background: #f4f6f9;
+            background: #F8F9FA;
             min-height: 100vh;
         }
 
+
         h1 {
-            color: #A66914;
+            color: #343A40;
             text-align: center;
             text-decoration: underline;
+            font-weight: bold;
             margin-bottom: 20px;
         }
 
@@ -36,6 +38,7 @@ $result = $conn->query($sql);
             overflow: hidden;
         }
 
+
         th,
         td {
             border: 1px solid #ddd;
@@ -45,24 +48,45 @@ $result = $conn->query($sql);
         }
 
         th {
-            background: #A66914;
+            background: #343A40;
             color: white;
             font-size: 18px;
         }
 
 
+        tr:nth-child(even) {
+            background: #F1F3F5;
+        }
+
+        tr:hover {
+            background: #E9ECEF;
+        }
+
+
         a {
             display: inline-block;
-            padding: 6px 12px;
-            background: #28a745;
+            padding: 8px 14px;
+            background: #17A2B8;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s ease-in-out;
         }
 
         a:hover {
-            background: #218838;
+            background: #138496;
+        }
+
+
+        .delete-btn {
+            background: #DC3545;
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+
+        .delete-btn:hover {
+            background: #C82333;
         }
 
 

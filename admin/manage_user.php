@@ -50,14 +50,14 @@ $result = $conn->query("SELECT * FROM users");
         }
 
         th {
-            background: #A66914;
+            background: #343A40;
             color: white;
             font-size: 18px;
         }
 
 
         h1 {
-            color: #A66914;
+            color: #343A40;
             text-align: center;
             text-decoration: underline;
             margin: 20px 0;

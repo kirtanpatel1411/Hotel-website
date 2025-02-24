@@ -66,12 +66,12 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
         }
 
         .card {
-            background: #ffffff;
+            background:rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             text-align: center;
-            color: #A66914;
+            color: #343A40;
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
@@ -130,7 +130,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
             </a>
             <a href="show_payment.php" class="card">
                 <h3><img src="../images/wallet.png" style="height: 50px;" alt="payment"></h3>
-                <p style="color:green">₹<?php echo number_format($totalPayments, 2); ?></p>
+                <p style="color:seagreen">₹<?php echo number_format($totalPayments, 2); ?></p>
             </a>
         </div>
         <img src="../images/power.png" style="height: 50px;" onclick="logout()" class="logout"></img>

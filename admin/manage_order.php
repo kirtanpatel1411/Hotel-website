@@ -16,18 +16,10 @@ $result = $conn->query("SELECT * FROM booking");
     <style>
         body {
             font-family: Arial, sans-serif;
-
             margin: 0;
             padding: 0;
             display: flex;
-        }
-
-
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            height: 100%;
-            background: #A66914;
+            background-color: #F8F9FA;
         }
 
 
@@ -36,16 +28,18 @@ $result = $conn->query("SELECT * FROM booking");
             padding: 30px;
             width: calc(100% - 260px);
             min-height: 100vh;
-
             text-align: center;
         }
 
+
         h2 {
-            color: #A66914;
+            color: #343A40;
             text-align: center;
             font-size: 26px;
             margin-bottom: 20px;
+            font-weight: bold;
         }
+
 
         .table-container {
             margin-top: 30px;
@@ -57,16 +51,15 @@ $result = $conn->query("SELECT * FROM booking");
             width: 100%;
             border-collapse: collapse;
             background: white;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
-
         th {
-            background-color: #A66914;
+            background-color: #343A40;
             color: white;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             font-size: 16px;
             text-transform: uppercase;
@@ -83,12 +76,12 @@ $result = $conn->query("SELECT * FROM booking");
 
 
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #F1F3F5;
         }
 
 
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #E9ECEF;
             transition: 0.2s ease-in-out;
         }
 

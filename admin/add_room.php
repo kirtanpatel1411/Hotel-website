@@ -85,29 +85,25 @@ $result = $conn->query("SELECT * FROM rooms");
     <title>Manage Rooms - Admin Panel</title>
     <style>
         body {
-            background-color: #f4f6f9;
+            background-color: #F8F9FA;
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
         }
 
-
         .container {
             margin-left: 270px;
             margin-right: 12px;
             padding: 0px;
-
             min-height: 100vh;
         }
 
-
         h2 {
-            color: #A66914;
+            color: #343A40;
             font-size: 28px;
             text-align: center;
             margin-bottom: 20px;
         }
-
 
         .form-container {
             width: 50%;
@@ -120,16 +116,17 @@ $result = $conn->query("SELECT * FROM rooms");
         }
 
         h3 {
-            color: #A66914;
+            color: #343A40;
             text-align: center;
             margin-bottom: 20px;
+            font-weight: bold;
         }
-
 
         label {
             font-weight: bold;
             margin-top: 10px;
             display: block;
+            color: #495057;
         }
 
         input,
@@ -138,15 +135,17 @@ $result = $conn->query("SELECT * FROM rooms");
             width: 100%;
             padding: 12px;
             margin: 5px 0;
-            border: 1px solid #ddd;
+            border: 1px solid #CED4DA;
             border-radius: 6px;
             font-size: 16px;
+            background-color: #FFF;
+            color: #343A40;
         }
 
 
         button {
             width: 100%;
-            background-color: #A66914;
+            background-color: #343A40;
             color: white;
             padding: 12px;
             border: none;
@@ -155,11 +154,6 @@ $result = $conn->query("SELECT * FROM rooms");
             border-radius: 6px;
             transition: 0.3s;
         }
-
-        button:hover {
-            background-color: #8D5A0D;
-        }
-
 
         .table-container {
             margin-top: 30px;
@@ -175,15 +169,13 @@ $result = $conn->query("SELECT * FROM rooms");
             overflow: hidden;
         }
 
-
         th {
-            background-color: #A66914;
+            background-color: #343A40;
             color: white;
             padding: 12px;
             font-size: 16px;
             text-transform: uppercase;
         }
-
 
         td {
             padding: 12px;
@@ -191,7 +183,6 @@ $result = $conn->query("SELECT * FROM rooms");
             font-size: 14px;
             color: #333;
         }
-
 
         td img {
             width: 80px;
@@ -203,14 +194,12 @@ $result = $conn->query("SELECT * FROM rooms");
             transform: scale(1.1);
         }
 
-
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #F1F3F5;
         }
 
-
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #E9ECEF;
             transition: 0.2s ease-in-out;
         }
 
@@ -234,24 +223,23 @@ $result = $conn->query("SELECT * FROM rooms");
             transition: 0.3s;
         }
 
-
         .update-btn {
-            background-color: #28A745;
+            background-color: #17A2B8;
             color: white;
         }
 
         .update-btn:hover {
-            background-color: #218838;
+            background-color: #138496;
         }
 
 
         .delete-btn {
-            background-color: red;
+            background-color: #DC3545;
             color: white;
         }
 
         .delete-btn:hover {
-            background-color: darkred;
+            background-color: #C82333;
         }
 
 
