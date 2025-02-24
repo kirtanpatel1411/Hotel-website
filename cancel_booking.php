@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $booking_id = $_POST['booking_id'];
 
-// Update the booking status to "canceled"
+
 $sql = "UPDATE booking SET status = 'canceled' WHERE id = '$booking_id' AND user_id = '$user_id'";
 
 if ($conn->query($sql) === TRUE) {
@@ -18,4 +18,3 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "<script>alert('Failed to cancel booking.');</script>";
 }
-?>

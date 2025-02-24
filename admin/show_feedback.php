@@ -8,31 +8,29 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Feedback</title>
     <style>
-          /* General Styling */
-          body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #f4f6f9;
             margin: 0;
             padding: 0;
         }
-        .container {
-    margin-left: 200px; /* Adjust to match sidebar width */
-    padding: 30px;
-    width: calc(100% - 260px); /* Responsive width */
-    min-height: 100vh;
-    /* max-width: 500px; */
-    /* background: #fff; */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    /* border-radius: 10px; */
-    text-align: center;
-}
 
-        /* Table Styling */
+        .container {
+            margin-left: 200px;
+            padding: 30px;
+            width: calc(100% - 260px);
+            min-height: 100vh;
+
+            text-align: center;
+        }
+
+
         table {
             width: 90%;
             margin: 30px auto;
@@ -43,7 +41,8 @@ $result = $conn->query($sql);
             overflow: hidden;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 10px;
             text-align: center;
@@ -55,7 +54,7 @@ $result = $conn->query($sql);
             font-size: 18px;
         }
 
-        /* Heading Styling */
+
         h1 {
             color: #A66914;
             text-align: center;
@@ -64,9 +63,10 @@ $result = $conn->query($sql);
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-    <h1>Customer Feedback</h1>
+        <h1>Customer Feedback</h1>
 
         <table border="1">
             <tr>
@@ -83,14 +83,14 @@ $result = $conn->query($sql);
                     <td><?= $row['name'] ?></td>
                     <td><?= $row['email'] ?></td>
                     <td><?= $row['phone'] ?></td>
-                <td><?= $row['visit_date'] ? $row['visit_date'] : 'N/A' ?></td>
-                <td><?= str_repeat("⭐", $row['rating']) ?></td>
-                <td><?= $row['message'] ?></td>
-                <td><?= $row['created_at'] ?></td>
-            </tr>
+                    <td><?= $row['visit_date'] ? $row['visit_date'] : 'N/A' ?></td>
+                    <td><?= str_repeat("⭐", $row['rating']) ?></td>
+                    <td><?= $row['message'] ?></td>
+                    <td><?= $row['created_at'] ?></td>
+                </tr>
             <?php } ?>
         </table>
     </div>
-    </body>
-    </html>
-    
+</body>
+
+</html>

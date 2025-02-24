@@ -3,16 +3,7 @@ session_start();
 include 'db.php';
 include 'header.php';
 
-// // Fetch booking_id correctly from GET or POST
-// if (isset($_POST['booking_id']) && !empty($_POST['booking_id'])) {
-//     $booking_id = $_POST['booking_id']; // Use POST if sent via form submission
-// } elseif (isset($_GET['booking_id']) && !empty($_GET['booking_id'])) {
-//     $booking_id = $_GET['booking_id']; // Use GET if sent via URL
-// } else {
-//     echo "<script>alert('Invalid Booking ID!'); window.location.href='index.php';</script>";
-//     exit();
-// }
-// Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     echo "<script>alert('Please login first!'); window.location.href='login.php';</script>";
     exit();
@@ -33,11 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
-    // Update user details
+
     $update_query = "UPDATE users SET name='$name', email='$email', phone='$phone' WHERE id='$user_id'";
 
     if ($conn->query($update_query) === TRUE) {
-        $_SESSION['user_name'] = $name; // Update session name
+        $_SESSION['user_name'] = $name;
         echo "<script>alert('Profile updated successfully!'); window.location.href='profile.php';</script>";
     } else {
         echo "<script>alert('Error updating profile!');</script>";
@@ -60,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin: 0;
         }
 
-        /* Profile Section - Positioned on Right */
+
         .profile-container {
             position: absolute;
             top: 101px;
@@ -135,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background: #c9302c;
         }
 
-        /* Booking Table */
+
         .bookings-container {
             max-width: 815px;
             margin: 128px 150px;
@@ -187,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: red;
         }
 
-        /* Cancel Button */
+
         .btn-cancel {
             background-color: red;
             color: white;
@@ -202,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: black;
         }
 
-        /* Green Button for Generate Bill */
+
         .btn-bill {
             background-color: green;
             color: white;
@@ -216,18 +207,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .btn-bill:hover {
             background-color: darkgreen;
         }
-
-        /* Flexbox for Button Alignment */
-        /* td {
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Spacing between buttons */
     </style>
 </head>
 
 <body>
 
-    <!-- Profile Section (Right Side) -->
+
     <div class="profile-container">
         <h2>My Profile</h2>
         <form action="profile.php" method="POST">
@@ -248,7 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <!-- Booking Details Table -->
+
     <div class="bookings-container">
         <h2>My Bookings</h2>
         <table>
@@ -273,13 +258,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td>
 
                         <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                            <!-- Cancel Button (Red) -->
+
                             <form action="cancel_booking.php" method="POST">
                                 <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
                                 <button type="submit" class="btn-cancel">Cancel</button>
                             </form>
 
-                            <!-- Generate Bill Button (Green) -->
+
                             <form action="bill.php" method="POST">
                                 <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
                                 <input type="hidden" name="total_price" value="<?php echo $row['total_price']; ?>">

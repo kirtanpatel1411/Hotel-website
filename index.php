@@ -3,10 +3,10 @@
 <?php
 session_start();
 
-include 'db.php'; // Include database connection
+include 'db.php';
 
 // Fetch only valid offers (not expired)
-$sql = "SELECT * FROM offers WHERE valid_until >= CURDATE() ORDER BY id DESC"; 
+$sql = "SELECT * FROM offers WHERE valid_until >= CURDATE() ORDER BY id DESC";
 $result = $conn->query($sql);
 
 
@@ -20,11 +20,11 @@ $result = $conn->query($sql);
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Hotel Website</title>
-   <!-- font awesome cdn link  -->
+
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <!-- swiper js cdn link -->
+
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <!-- custom css link -->
+
    <link rel="stylesheet" href="style.css">
    <script>
       function toggleDropdown() {
@@ -42,30 +42,29 @@ $result = $conn->query($sql);
             }
          }
       }
-      
-      document.addEventListener("DOMContentLoaded", function () {
-    const logo = document.getElementById("logoClick");
-    const popup = document.getElementById("offerPopup");
-    const closeBtn = document.querySelector(".close-btn");
 
-    // Show popup when clicking the logo
-    logo.addEventListener("click", function () {
-        popup.style.display = "flex";
-    });
+      document.addEventListener("DOMContentLoaded", function() {
+         const logo = document.getElementById("logoClick");
+         const popup = document.getElementById("offerPopup");
+         const closeBtn = document.querySelector(".close-btn");
 
-    // Close popup when clicking "X"
-    closeBtn.addEventListener("click", function () {
-        popup.style.display = "none";
-    });
+         // Show popup when clicking the logo
+         logo.addEventListener("click", function() {
+            popup.style.display = "flex";
+         });
 
-    // Close popup when clicking outside content
-    window.addEventListener("click", function (event) {
-        if (event.target === popup) {
+         // Close popup when clicking "X"
+         closeBtn.addEventListener("click", function() {
             popup.style.display = "none";
-        }
-    });
-});
+         });
 
+         // Close popup when clicking outside content
+         window.addEventListener("click", function(event) {
+            if (event.target === popup) {
+               popup.style.display = "none";
+            }
+         });
+      });
    </script>
    <style>
       .dropdown {
@@ -138,37 +137,22 @@ $result = $conn->query($sql);
       <div class="swiper-wrapper">
 
          <div class="swiper-slide slide" style="background: url(images/banner3.jpg  ) no-repeat;">
-            <!-- <div class="content">
-               <h3>it's where dreams come true</h3>
-               <a href="#" class="btn"> visit our offer</a>
-            </div> -->
+
          </div>
 
          <div class="swiper-slide slide" style="background: url(images/banner2.jpg) no-repeat;">
-            <!-- <div class="content">
-               <h3>it's where dreams come true</h3>
-               <a href="#" class="btn"> visit our offer</a>
-            </div> -->
+
          </div>
 
          <div class="swiper-slide slide" style="background: url(images/home-slide1.jpg) no-repeat;">
-            <!-- <div class="content">
-               <h3>it's where dreams come true</h3>
-               <a href="#" class="btn"> visit our offer</a>
-            </div> -->
+
          </div>
 
          <div class="swiper-slide slide" style="background: url(images/home-slide4.jpg) no-repeat;">
-            <!-- <div class="content">
-               <h3>it's where dreams come true</h3>
-               <a href="#" class="btn"> visit our offer</a>
-            </div> -->
+
          </div>
          <div class="swiper-slide slide" style="background: url(images/home-slide3.jpg) no-repeat;">
-            <!-- <div class="content">
-               <h3>it's where dreams come true</h3>
-               <a href="#" class="btn"> visit our offer</a>
-            </div> -->
+
          </div>
 
 
@@ -206,8 +190,7 @@ $result = $conn->query($sql);
             <option value="2">2 adults</option>
             <option value="3">3 adults</option>
             <option value="4">4 adults</option>
-            <option value="5">5 adults</option>
-            <option value="6">6 adults</option>
+
          </select>
       </div>
 
@@ -218,8 +201,7 @@ $result = $conn->query($sql);
             <option value="2">2 child</option>
             <option value="3">3 child</option>
             <option value="4">4 child</option>
-            <option value="5">5 child</option>
-            <option value="6">6 child</option>
+
          </select>
       </div>
 
@@ -230,8 +212,7 @@ $result = $conn->query($sql);
             <option value="2">2 rooms</option>
             <option value="3">3 rooms</option>
             <option value="4">4 rooms</option>
-            <option value="5">5 rooms</option>
-            <option value="6">6 rooms</option>
+
          </select>
       </div>
 
@@ -310,145 +291,6 @@ $result = $conn->query($sql);
 
 <!-- end -->
 
-<!-- room -->
-
-<!-- <section class="room" id="room">
-
-   <h1 class="heading">our room</h1>
-
-   <div class="swiper room-slider">
-
-      <div class="swiper-wrapper">
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <span class="price">$15.99/night</span>
-               <img src="images/room-1.jpg" alt="">
-               <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-            <div class="content">
-               <h3>exclusive room</h3>
-               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente nisi.</p>
-               <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-               </div>
-               <a href="#" class="btn">book now</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <span class="price">$15.99/night</span>
-               <img src="images/room-2.jpg" alt="">
-               <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-            <div class="content">
-               <h3>exclusive room</h3>
-               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente nisi.</p>
-               <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-               </div>
-               <a href="#" class="btn">book now</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <span class="price">$15.99/night</span>
-               <img src="images/room-3.jpg" alt="">
-               <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-            <div class="content">
-               <h3>exclusive room</h3>
-               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente nisi.</p>
-               <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-               </div>
-               <a href="#" class="btn">book now</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <span class="price">$15.99/night</span>
-               <img src="images/room-4.jpg" alt="">
-               <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-            <div class="content">
-               <h3>exclusive room</h3>
-               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente nisi.</p>
-               <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-               </div>
-               <a href="#" class="btn">book now</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <span class="price">$15.99/night</span>
-               <img src="images/room-5.jpg" alt="">
-               <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-            <div class="content">
-               <h3>exclusive room</h3>
-               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente nisi.</p>
-               <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-               </div>
-               <a href="#" class="btn">book now</a>
-            </div>
-         </div>
-
-         <div class="swiper-slide slide">
-            <div class="image">
-               <span class="price">$15.99/night</span>
-               <img src="images/room-6.jpg" alt="">
-               <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-            <div class="content">
-               <h3>exclusive room</h3>
-               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente nisi.</p>
-               <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-               </div>
-               <a href="#" class="btn">book now</a>
-            </div>
-         </div>
-
-      </div>
-
-      <div class="swiper-pagination"></div>
-
-   </div>
-
-</section> -->
-
-<!-- end -->
 
 
 <!-- gallery -->
@@ -513,46 +355,46 @@ $result = $conn->query($sql);
 
 <section class="facilities" id="facilities   ">
 
-<div class="facilities-container">
-   <h1>Our Facilities</h1>
-   <div class="facilities-grid">
-      <div class="facility-card">
-         <img src="images/service1.png" alt="Swimming Pool">
-         <h3>Swimming Pool</h3>
-         <p>Relax and unwind in our luxurious swimming pool with a poolside lounge.</p>
-      </div>
+   <div class="facilities-container">
+      <h1>Our Facilities</h1>
+      <div class="facilities-grid">
+         <div class="facility-card">
+            <img src="images/service1.png" alt="Swimming Pool">
+            <h3>Swimming Pool</h3>
+            <p>Relax and unwind in our luxurious swimming pool with a poolside lounge.</p>
+         </div>
 
-      <div class="facility-card">
-         <img src="images/service5.png" alt="Spa & Wellness">
-         <h3>Spa & Wellness</h3>
-         <p>Rejuvenate with our spa services, sauna, and wellness treatments.</p>
-      </div>
+         <div class="facility-card">
+            <img src="images/service5.png" alt="Spa & Wellness">
+            <h3>Spa & Wellness</h3>
+            <p>Rejuvenate with our spa services, sauna, and wellness treatments.</p>
+         </div>
 
-      <div class="facility-card">
-         <img src="images/service3.png" alt="Restaurant">
-         <h3>Multi-Cuisine Restaurant</h3>
-         <p>Enjoy gourmet dishes prepared by our world-class chefs.</p>
-      </div>
+         <div class="facility-card">
+            <img src="images/service3.png" alt="Restaurant">
+            <h3>Multi-Cuisine Restaurant</h3>
+            <p>Enjoy gourmet dishes prepared by our world-class chefs.</p>
+         </div>
 
-      <div class="facility-card">
-         <img src="images/service4.png" alt="Gym & Fitness">
-         <h3>Gym & Fitness</h3>
-         <p>Stay fit with our state-of-the-art fitness center and personal trainers.</p>
-      </div>
+         <div class="facility-card">
+            <img src="images/service4.png" alt="Gym & Fitness">
+            <h3>Gym & Fitness</h3>
+            <p>Stay fit with our state-of-the-art fitness center and personal trainers.</p>
+         </div>
 
-      <div class="facility-card">
-         <img src="images/wifi.jpg" alt="Free WiFi">
-         <h3>Free WiFi</h3>
-         <p>High-speed internet access available throughout the hotel.</p>
-      </div>
+         <div class="facility-card">
+            <img src="images/wifi.jpg" alt="Free WiFi">
+            <h3>Free WiFi</h3>
+            <p>High-speed internet access available throughout the hotel.</p>
+         </div>
 
-      <div class="facility-card">
-         <img src="images/parking.png" alt="Parking">
-         <h3>Free Parking</h3>
-         <p>Spacious and secure parking area for our guests.</p>
+         <div class="facility-card">
+            <img src="images/parking.png" alt="Parking">
+            <h3>Free Parking</h3>
+            <p>Spacious and secure parking area for our guests.</p>
+         </div>
       </div>
    </div>
-</div>
 
 </section>
 
@@ -618,31 +460,31 @@ $result = $conn->query($sql);
 
 <!-- end -->
 
-   <!-- Offer Icon -->
-   <div class="offerlogo" id="logoClick">
-    <img src="images/offer.png" alt="Hotel Logo">
+<!-- Offer Icon -->
+<div class="offerlogo" id="logoClick">
+   <img src="images/offer.png" alt="Hotel Logo">
 </div>
 
 <div id="offerPopup" class="popup">
-    <div class="popup-content">
-        <span class="close-btn">&times;</span>
+   <div class="popup-content">
+      <span class="close-btn">&times;</span>
 
-        <?php if ($result->num_rows > 0) { ?>
-            <?php while ($offer = $result->fetch_assoc()) { ?>
-                <div class="offer-box">
-                   
-                    <h2><?php echo htmlspecialchars($offer['title']); ?></h2>
-                    <p><?php echo htmlspecialchars($offer['description']); ?></p>
-                    <h3>Discount: <?php echo htmlspecialchars($offer['discount_percentage']); ?>% OFF</h3>
-                    <p><strong>Valid Until:</strong> <?php echo htmlspecialchars($offer['valid_until']); ?></p>
-                    <hr>
-                </div>
-            <?php } ?>
-        <?php } else { ?>
-            <p>No current offers available.</p>
-        <?php } ?>
+      <?php if ($result->num_rows > 0) { ?>
+         <?php while ($offer = $result->fetch_assoc()) { ?>
+            <div class="offer-box">
 
-    </div>
+               <h2><?php echo htmlspecialchars($offer['title']); ?></h2>
+               <p><?php echo htmlspecialchars($offer['description']); ?></p>
+               <h3>Discount: <?php echo htmlspecialchars($offer['discount_percentage']); ?>% OFF</h3>
+               <p><strong>Valid Until:</strong> <?php echo htmlspecialchars($offer['valid_until']); ?></p>
+               <hr>
+            </div>
+         <?php } ?>
+      <?php } else { ?>
+         <p>No current offers available.</p>
+      <?php } ?>
+
+   </div>
 </div>
 
 

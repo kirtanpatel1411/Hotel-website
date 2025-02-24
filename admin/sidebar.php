@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <style>
-        /* General Styling */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -14,7 +13,6 @@
             display: flex;
         }
 
-        /* Sidebar Styles */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -44,7 +42,7 @@
             padding: 15px 20px;
             color: #fff;
             font-size: 16px;
-            cursor: pointer; /* Makes it look clickable */
+            cursor: pointer;
             transition: background 0.3s;
         }
 

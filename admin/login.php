@@ -26,68 +26,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-.container {
-    background: white;
-    padding: 90px;
-    border: 7px solid black;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 300px;
-}
+        .container {
+            background: white;
+            padding: 90px;
+            border: 7px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
 
-h2 {
-    color: #A66914;
-}
+        h2 {
+            color: #A66914;
+        }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 3px solid black;
-    border-radius: 15px;
-}
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 3px solid black;
+            border-radius: 15px;
+        }
 
-button {
-    background-color: #A66914;
-    color: white;
-    padding: 10px;
-    border: none;
-    width: 100%;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        button {
+            background-color: #A66914;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-button:hover {
-    background-color: #8b5510;
-}
+        button:hover {
+            background-color: #8b5510;
+        }
 
-p a {
-    color: #A66914;
-    text-decoration: none;
-}
+        p a {
+            color: #A66914;
+            text-decoration: none;
+        }
 
-p a:hover {
-    text-decoration: underline;
-}
-
+        p a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Admin Login</h2>
@@ -99,4 +100,5 @@ p a:hover {
         <p>Don't have an account? <a href="register.php">Register</a></p>
     </div>
 </body>
+
 </html>

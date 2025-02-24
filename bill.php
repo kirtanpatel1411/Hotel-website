@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-// Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     echo "<script>alert('Please login first!'); window.location.href='login.php';</script>";
     exit();
@@ -17,7 +17,6 @@ $booking_id = $_POST['booking_id'];
 $total_price = $_POST['total_price'];
 $user_id = $_SESSION['user_id'];
 
-// Fetch user details
 $user_sql = "SELECT * FROM users WHERE id = '$user_id'";
 $user_result = $conn->query($user_sql);
 $user = $user_result->fetch_assoc();
@@ -27,7 +26,7 @@ if (!$user) {
     exit();
 }
 
-// Fetch booking details with payment method
+
 $sql = "SELECT booking.*, payments.payment_method, payments.payment_id, rooms.name AS room_name 
         FROM booking 
         INNER JOIN payments ON booking.id = payments.booking_id 
@@ -178,7 +177,7 @@ $booking = $result->fetch_assoc();
             </tr>
         </table>
 
-        <p class="total"><strong>Grand Total: ₹<?= number_format($booking['total_price'] * 1.05,2); ?></strong></p>
+        <p class="total"><strong>Grand Total: ₹<?= number_format($booking['total_price'] * 1.05, 2); ?></strong></p>
 
         <div class="btn-print">
             <button onclick="window.print()">Print Invoice</button>

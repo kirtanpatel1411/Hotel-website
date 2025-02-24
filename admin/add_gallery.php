@@ -35,10 +35,9 @@ if (isset($_GET['delete'])) {
     alert('image deleted successfully!');
     window.location.href = 'add_gallery.php'; // Redirect to home page
 </script>";
-   
 }
 
-// Fetch all rooms
+
 $result = $conn->query("SELECT * FROM gallery");
 ?>
 
@@ -50,7 +49,6 @@ $result = $conn->query("SELECT * FROM gallery");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Upload Gallery Image</title>
     <style>
-        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f6f9;
@@ -59,38 +57,32 @@ $result = $conn->query("SELECT * FROM gallery");
             display: flex;
         }
 
-        /* Sidebar Handling */
+
         .sidebar {
             width: 250px;
-            /* Adjust based on actual sidebar width */
             position: fixed;
             height: 100%;
             background: #A66914;
-            /* Adjust color as per sidebar */
+
         }
 
-        /* Main Content Wrapper */
         .container {
             margin-left: 260px;
-            /* Adjust to match sidebar width */
             padding: 30px;
             width: calc(100% - 260px);
-            /* Makes it responsive */
             min-height: 100vh;
-            /* background: #fff; */
-            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-            /* border-radius: 10px; */
+
             text-align: center;
         }
 
-        /* Page Heading */
+
         h2 {
             color: #A66914;
             font-size: 26px;
             margin-bottom: 20px;
         }
 
-        /* Form Styling */
+
         form {
             width: 50%;
             margin: auto;
@@ -105,7 +97,7 @@ $result = $conn->query("SELECT * FROM gallery");
             gap: 15px;
         }
 
-        /* Input Field */
+
         input[type="file"] {
             padding: 10px;
             border: 2px solid #A66914;
@@ -115,7 +107,7 @@ $result = $conn->query("SELECT * FROM gallery");
             cursor: pointer;
         }
 
-        /* Upload Button */
+
         button {
             width: 80%;
             background-color: #A66914;
@@ -132,7 +124,7 @@ $result = $conn->query("SELECT * FROM gallery");
             background-color: #8D5A0D;
         }
 
-        /* Table Styling */
+
         table {
             width: 90%;
             margin: auto;
@@ -143,7 +135,7 @@ $result = $conn->query("SELECT * FROM gallery");
             overflow: hidden;
         }
 
-        /* Table Header */
+
         th {
             background-color: #A66914;
             color: white;
@@ -152,7 +144,7 @@ $result = $conn->query("SELECT * FROM gallery");
             text-transform: uppercase;
         }
 
-        /* Table Cells */
+
         td {
             padding: 12px;
             border-bottom: 1px solid #ddd;
@@ -161,7 +153,7 @@ $result = $conn->query("SELECT * FROM gallery");
             text-align: center;
         }
 
-        /* Image Styling */
+
         td img {
             width: 80px;
             border-radius: 5px;
@@ -172,7 +164,7 @@ $result = $conn->query("SELECT * FROM gallery");
             transform: scale(1.1);
         }
 
-        /* Delete Button */
+
         .delete-btn {
             display: inline-block;
             background: #e74c3c;
@@ -189,7 +181,7 @@ $result = $conn->query("SELECT * FROM gallery");
             transform: scale(1.05);
         }
 
-        /* Responsive Design */
+
         @media (max-width: 768px) {
             .container {
                 margin-left: 0;
@@ -222,7 +214,7 @@ $result = $conn->query("SELECT * FROM gallery");
             <button type="submit">Upload</button>
         </form>
     </div>
-    <!-- <h1><center><u>Existing Images</u></center></h1> -->
+
     <table>
         <tr>
             <th>ID</th>

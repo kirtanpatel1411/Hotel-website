@@ -12,7 +12,6 @@
         $rooms = $_GET['rooms'] ?? "";
     }
 
-    // Fetch room details from URL parameters
     if (isset($_GET['room_id'])) {
         $room_id = $_GET['room_id'];
         $sql = "SELECT * FROM rooms WHERE id = '$room_id'";
@@ -23,7 +22,6 @@
         exit;
     }
 
-    // Handle form submission
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user_id = $_SESSION['user_id'];
         $room_name = $_POST['room_name'];
@@ -37,7 +35,7 @@
         $children = $_POST['children'];
         $rooms = $_POST['rooms'];
         $total_price = $_POST['total_price'];
-        $status=$_POST['status'];
+        $status = $_POST['status'];
 
         $sql = "INSERT INTO booking (user_id,room_id,room_name, customer_name, email, phone, check_in, check_out, adults, children, rooms, total_price,status) VALUES ('$user_id','$room_id','$room_name', '$customer_name', '$email','$phone', '$check_in', '$check_out', '$adults', '$children', '$rooms', '$total_price','pending')";
 
@@ -82,7 +80,6 @@
                 }
             }
 
-            // Auto calculate total on page load if values are pre-filled
             window.onload = function() {
                 calculateTotal();
             };
@@ -101,7 +98,7 @@
                 max-width: 1000px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 border-radius: 4px;
-                
+
             }
 
             .container {
@@ -109,8 +106,7 @@
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 20px;
-                /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                border-radius: 4px; */
+
             }
 
             .box {
@@ -145,7 +141,7 @@
     </head>
 
     <body>
-        
+
         <div class="container">
             <section class="reservation" id="reservation">
                 <h1 class="heading">Book Now</h1>

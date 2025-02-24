@@ -4,7 +4,7 @@ include 'header.php';
 
 include 'db.php';
 
-// Debugging: Ensure `booking_id` is received
+
 if (!isset($_GET['booking_id']) || empty($_GET['booking_id'])) {
    echo "<script>alert('Invalid Booking ID!'); window.location.href='index.php';</script>";
    exit;
@@ -13,7 +13,7 @@ if (!isset($_GET['booking_id']) || empty($_GET['booking_id'])) {
 $booking_id = $_GET['booking_id'];
 $total_price = $_GET['total_price'];
 
-// Fetch booking details with room and payment details
+
 $sql = "SELECT booking.*, 
                rooms.name AS room_name,
                payments.payment_id, 
@@ -94,7 +94,8 @@ if (!$booking) {
       .btn:hover {
          background-color: #8A5410;
       }
-      .btndiv{
+
+      .btndiv {
          display: flex;
          justify-content: center;
 
@@ -127,14 +128,14 @@ if (!$booking) {
 
 
       <form action="add_to_profile.php" method="POST">
-   <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-   <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
-   <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
-   <div class="btndiv">
+         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+         <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
+         <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
+         <div class="btndiv">
 
-      <button type="submit" class="btn">Save</button>
-   </div>
-</form>
+            <button type="submit" class="btn">Save</button>
+         </div>
+      </form>
 
 
 

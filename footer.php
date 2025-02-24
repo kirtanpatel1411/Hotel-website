@@ -6,11 +6,11 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Hotel Website</title>
-   <!-- font awesome cdn link  -->
+
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <!-- swiper js cdn link -->
+
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <!-- custom css link -->
+
    <link rel="stylesheet" href="style.css">
 </head>
 
@@ -24,7 +24,7 @@
             <a href="#"> <i class="fas fa-envelope"></i>reservations@courtyardsurat.com</a>
             <a href="#"> <i class="fas fa-map"></i>Earthspace, Hazira Road, Surat, Gujarat, India</a>
          </div>
-         
+
          <div class="box">
             <h3>quick links</h3>
             <a href="index.php"> <i class="fas fa-arrow-right"></i>Home</a>

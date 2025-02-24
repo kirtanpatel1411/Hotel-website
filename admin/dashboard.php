@@ -1,26 +1,23 @@
 <?php
 include 'sidebar.php';
-include '../db.php'; // Database connection file
+include '../db.php'; 
 
-// Fetch total users
+
 $userQuery = "SELECT COUNT(*) as totalUsers FROM users";
 $userResult = $conn->query($userQuery);
 $userData = $userResult->fetch_assoc();
 $totalUsers = $userData['totalUsers'];
 
-// Fetch total orders
 $orderQuery = "SELECT COUNT(*) as totalOrders FROM booking";
 $orderResult = $conn->query($orderQuery);
 $orderData = $orderResult->fetch_assoc();
 $totalOrders = $orderData['totalOrders'];
 
-// Fetch total rooms
 $roomQuery = "SELECT COUNT(*) as totalRooms FROM rooms";
 $roomResult = $conn->query($roomQuery);
 $roomData = $roomResult->fetch_assoc();
 $totalRooms = $roomData['totalRooms'];
 
-// Fetch total feedbacks
 $feedbackQuery = "SELECT COUNT(*) as totalFeedback FROM feedback";
 $feedbackResult = $conn->query($feedbackQuery);
 $feedbackData = $feedbackResult->fetch_assoc();
@@ -35,7 +32,7 @@ $totaloffer = $offerData['totaloffer'];
 $paymentQuery = "SELECT SUM(amount) as totalPayments FROM payments WHERE payment_status = 'Completed'";
 $paymentResult = $conn->query($paymentQuery);
 $paymentData = $paymentResult->fetch_assoc();
-$totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] : 0; // Default to 0 if no payments
+$totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] : 0; 
 
 ?>
 
@@ -47,7 +44,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-        /* Main Content Styles */
+
         .main-content {
             margin-left: 250px;
             padding: 30px;
@@ -61,7 +58,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
             font-size: 24px;
         }
 
-        /* Stats Cards Styling */
+  
         .stats-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -79,9 +76,9 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
-            /* Removes underline */
+         
             display: block;
-            /* Makes entire card clickable */
+          
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 

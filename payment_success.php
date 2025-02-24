@@ -25,7 +25,7 @@ if (!$booking) {
     exit;
 }
 
-// Handle Payment Submission
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $customer_name = $_POST['customer_name'];
     $amount = $_POST['amount'];
@@ -119,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: #8A5410;
         }
 
-        /* Style for the Generate Bill button */
         .btn {
             background: #555;
             color: white;

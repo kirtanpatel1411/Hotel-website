@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $visit_date = !empty($_POST['visit_date']) ? $_POST['visit_date'] : NULL; // Optional
+    $visit_date = !empty($_POST['visit_date']) ? $_POST['visit_date'] : NULL;
     $rating = $_POST['rating'];
     $message = $_POST['message'];
 
@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Feedback</title>
     <style>
-        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -40,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 0;
         }
 
-        /* Main Container */
+
         .container {
             display: flex;
             justify-content: left;
@@ -52,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             height: 100vh;
         }
 
-        /* Left Side Content */
         .left-content {
             flex: 1;
             text-align: center;
@@ -70,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-top: 10px;
         }
 
-        /* Feedback Form */
+
         .feedback-form {
             width: 40%;
             background: white;
@@ -101,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 5px;
         }
 
-        /* Rating Stars */
+
         #rating span {
             font-size: 24px;
             cursor: pointer;
@@ -113,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #A66914;
         }
 
-        /* Button */
+
         button {
             background: #A66914;
             color: white;
@@ -130,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background: #8A5410;
         }
 
-        /* Responsive */
+
         @media (max-width: 900px) {
             .container {
                 flex-direction: column;
@@ -143,8 +141,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        /* Blink Effect */
+
         @keyframes blinkAnimation {
+
             0%,
             100% {
                 opacity: 1;
@@ -163,14 +162,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="container">
-        <!-- Left Content -->
+
         <div class="left-content">
             <h1>We Value Your Feedback!</h1>
             <p>At Courtyard Marriott Surat, we strive to provide an unforgettable experience for our guests. Your feedback helps us improve our services and create a more comfortable environment. Whether it's about our hospitality, rooms, dining, or overall experience, we would love to hear from you.</p>
             <p>Please take a moment to share your thoughts and rate your experience. We appreciate your time and look forward to welcoming you again soon!</p>
         </div>
 
-        <!-- Feedback Form -->
+
         <form class="feedback-form" action="feedback.php" method="POST" onsubmit="return validateFeedback()">
             <h2>Give Your Feedback</h2>
             <label>Name:</label>
