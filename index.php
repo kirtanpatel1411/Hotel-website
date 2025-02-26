@@ -218,6 +218,7 @@ $result = $conn->query($sql);
       <div class="box">
          <p>Price <span>*</span></p>
          <select name="price" id="" class="input">
+            <option value="2000">under 2000 </option>
             <option value="3000">under 3000 </option>
             <option value="8000">under 8000</option>
             <option value="14000">under 14000</option>

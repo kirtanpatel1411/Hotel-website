@@ -255,6 +255,7 @@ if(isset($_GET['price']) || isset($_POST['price'])) {
             <div class="box">
         <p>Price <span>*</span></p>
         <select name="price" class="input">
+            <option value="2000" <?php if ($price == "2000") echo "selected"; ?>>Under 2000</option>
             <option value="3000" <?php if ($price == "3000") echo "selected"; ?>>Under 3000</option>
             <option value="8000" <?php if ($price == "8000") echo "selected"; ?>>Under 8000</option>
             <option value="14000" <?php if ($price == "14000") echo "selected"; ?>>Under 14000</option>
