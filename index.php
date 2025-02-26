@@ -215,6 +215,16 @@ $result = $conn->query($sql);
 
          </select>
       </div>
+      <div class="box">
+         <p>Price <span>*</span></p>
+         <select name="price" id="" class="input">
+            <option value="3000">under 3000 </option>
+            <option value="8000">under 8000</option>
+            <option value="14000">under 14000</option>
+            <option value="18000">under 18000</option>
+
+         </select>
+      </div>
 
       <button type="submit" class="btn">Check Availability</button>
 

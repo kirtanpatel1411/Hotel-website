@@ -5,7 +5,7 @@ include 'db.php';
 include 'header.php';
 
 
-$checkin = $checkout = $adults = $children = $rooms = "";
+// $checkin = $checkout = $adults = $children = $rooms = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -14,10 +14,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
    $adults = $_GET['adults'] ?? "";
    $children = $_GET['child'] ?? "";
    $rooms = $_GET['rooms'] ?? "";
+   $price = $_GET['price'] ?? "";
+} 
+if(isset($_GET['price']) || isset($_POST['price'])) { 
+   $price = isset($_GET['price']) ? $_GET['price'] : $_POST['price'];
+   // $price = $_GET['price'];
+   $sql = "SELECT * FROM rooms WHERE price <= '$price'";
+   $result = mysqli_query($conn, $sql);
+}else{
+   $sql = "SELECT * FROM rooms WHERE status='Available'";
+   $result = $conn->query($sql);
+   
 }
-
-$sql = "SELECT * FROM rooms WHERE status = 'available'";
-$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -168,6 +176,23 @@ $result = $conn->query($sql);
       .room button:hover {
          background-color: #8A5410;
       }
+      form button {
+         background-color: #A66914;
+         color: white;
+         border: none;
+         padding: 8px 16px;
+
+         cursor: pointer;
+         font-size: 16px;
+         border-radius: 5px;
+         transition: 0.3s;
+         width: auto;
+
+      }
+
+      form button:hover {
+         background-color: #8A5410;
+      }
 
 
       @media (max-width: 768px) {
@@ -203,7 +228,7 @@ $result = $conn->query($sql);
          <form action="" method="">
             <div class="box">
                <p>Check In <span>*</span></p>
-               <input type="date" class="input" name="checkin" value="<?php echo $checkin; ?>" required>
+               <input type="date" class="input" name="checkin" value="<?php echo $checkin; ?>" >
             </div>
             <div class="box">
                <p>Check Out <span>*</span></p>
@@ -221,7 +246,22 @@ $result = $conn->query($sql);
                <p>Rooms <span>*</span></p>
                <input type="number" class="input" name="rooms" value="<?php echo $rooms; ?>" required>
             </div>
-
+            <!-- <div class="box">
+               <p>price <span>*</span></p>
+               <input type="number" class="input" name="price" value="<?php //echo $price; ?>" required>
+            </div> -->
+         </form>
+            <form action="room.php" method="POST">
+            <div class="box">
+        <p>Price <span>*</span></p>
+        <select name="price" class="input">
+            <option value="3000" <?php if ($price == "3000") echo "selected"; ?>>Under 3000</option>
+            <option value="8000" <?php if ($price == "8000") echo "selected"; ?>>Under 8000</option>
+            <option value="14000" <?php if ($price == "14000") echo "selected"; ?>>Under 14000</option>
+            <option value="18000" <?php if ($price == "18000") echo "selected"; ?>>Under 18000</option>
+        </select>
+    </div>
+      <button type="submit">Update</button>
          </form>
       </div>
 
