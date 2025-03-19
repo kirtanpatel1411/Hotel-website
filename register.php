@@ -4,7 +4,7 @@ session_start();
 include 'db.php';
 include 'header.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { 
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
