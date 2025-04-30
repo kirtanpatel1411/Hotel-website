@@ -16,7 +16,7 @@ $payment_status = "Completed"; // Default status
 $payment_id = "PAY-" . rand(1000, 9999);
 
 
-$sql = "SELECT * FROM booking WHERE id = '$booking_id'";
+$sql = "SELECT * FROM `order` WHERE O_id = '$booking_id'";
 $result = $conn->query($sql);
 $booking = $result->fetch_assoc();
 
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="" method="POST">
             <div class="box">
                 <p>Booking ID:</p>
-                <input type="text" class="input" name="booking_id" value="<?php echo htmlspecialchars($booking['id']); ?>" readonly>
+                <input type="text" class="input" name="booking_id" value="<?php echo htmlspecialchars($booking['O_id']); ?>" readonly>
             </div>
             <div class="box">
                 <p>Customer Name:</p>

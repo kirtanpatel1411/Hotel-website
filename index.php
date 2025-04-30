@@ -6,8 +6,8 @@ session_start();
 include 'db.php';
 
 // Fetch only valid offers (not expired)
-$sql = "SELECT * FROM offers WHERE valid_until >= CURDATE() ORDER BY id DESC";
-$result = $conn->query($sql);
+// $sql = "SELECT * FROM offers WHERE valid_until >= CURDATE() ORDER BY id DESC";
+// $result = $conn->query($sql);
 
 
 
@@ -185,7 +185,7 @@ $result = $conn->query($sql);
 
       <div class="box">
          <p>adults <span>*</span></p>
-         <select name="adults" id="" class="input">
+         <select name="no_adults" id="" class="input">
             <option value="1">1 adults</option>
             <option value="2">2 adults</option>
             <option value="3">3 adults</option>
@@ -196,7 +196,7 @@ $result = $conn->query($sql);
 
       <div class="box">
          <p>children <span>*</span></p>
-         <select name="child" id="" class="input">
+         <select name="no_children" id="" class="input">
             <option value="1">1 child</option>
             <option value="2">2 child</option>
             <option value="3">3 child</option>
@@ -207,7 +207,7 @@ $result = $conn->query($sql);
 
       <div class="box">
          <p>rooms <span>*</span></p>
-         <select name="rooms" id="" class="input">
+         <select name="no_rooms" id="" class="input">
             <option value="1">1 rooms</option>
             <option value="2">2 rooms</option>
             <option value="3">3 rooms</option>
@@ -484,9 +484,9 @@ $result = $conn->query($sql);
          <?php while ($offer = $result->fetch_assoc()) { ?>
             <div class="offer-box">
 
-               <h2><?php echo htmlspecialchars($offer['title']); ?></h2>
+            
                <p><?php echo htmlspecialchars($offer['description']); ?></p>
-               <h3>Discount: <?php echo htmlspecialchars($offer['discount_percentage']); ?>% OFF</h3>
+               
                <p><strong>Valid Until:</strong> <?php echo htmlspecialchars($offer['valid_until']); ?></p>
                <hr>
             </div>

@@ -10,25 +10,28 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$query = "SELECT * FROM users WHERE id='$user_id'";
+$query = "SELECT * FROM registration WHERE u_id='$user_id'";
 $result = $conn->query($query);
 $user = $result->fetch_assoc();
 
-$sql = "SELECT booking.*, rooms.name AS room_name FROM booking 
-        JOIN rooms ON booking.room_id = rooms.id 
-        WHERE booking.user_id = '$user_id' AND booking.status = 'confirmed'";
+$sql = "SELECT `order`.*, rooms.room_type AS room_type FROM `order` 
+        JOIN rooms ON `order`.room_id = rooms.r_id 
+        WHERE `order`.u_id = '$user_id'";
+
 $result = $conn->query($sql);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
+    $city=$_POST['city'];
+    $address=$_POST['address'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
 
-    $update_query = "UPDATE users SET name='$name', email='$email', phone='$phone' WHERE id='$user_id'";
+    $update_query = "UPDATE registration SET name='$name', city='$city', address='$address' email='$email', phone='$phone' WHERE u_id='$user_id'";
 
     if ($conn->query($update_query) === TRUE) {
-        $_SESSION['user_name'] = $name;
+        $_SESSION['name'] = $name;
         echo "<script>alert('Profile updated successfully!'); window.location.href='profile.php';</script>";
     } else {
         echo "<script>alert('Error updating profile!');</script>";
@@ -218,7 +221,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="profile.php" method="POST">
             <label>Name:</label>
             <input type="text" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
-
+            <label>City:</label>
+            <input type="text" name="city" value="<?php echo htmlspecialchars($user['city']); ?>" required>
+            <label>Address:</label>
+            <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
+            
             <label>Email:</label>
             <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
 
@@ -248,7 +255,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['room_name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['room_type']); ?></td>
                     <td><?php echo htmlspecialchars($row['check_in']); ?></td>
                     <td><?php echo htmlspecialchars($row['check_out']); ?></td>
                     <td>₹<?php echo number_format($row['total_price'] * 1.05, 2); ?></td>

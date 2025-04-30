@@ -12,9 +12,9 @@ include 'header.php';
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
    $checkin = $_GET['checkin'] ?? "";
    $checkout = $_GET['checkout'] ?? "";
-   $adults = $_GET['adults'] ?? "";
-   $children = $_GET['child'] ?? "";
-   $rooms = $_GET['rooms'] ?? "";
+   $no_adults = $_GET['no_adults'] ?? "";
+   $no_children = $_GET['no_children'] ?? "";
+   $no_rooms = $_GET['no_rooms'] ?? "";
    $price = $_GET['price'] ?? "";
 } 
 if(isset($_GET['price']) || isset($_POST['price'])) { 
@@ -23,7 +23,7 @@ if(isset($_GET['price']) || isset($_POST['price'])) {
    $sql = "SELECT * FROM rooms WHERE price <= '$price'";
    $result = mysqli_query($conn, $sql);
 }else{
-   $sql = "SELECT * FROM rooms WHERE status='Available'";
+   $sql = "SELECT * FROM rooms";
    $result = $conn->query($sql);
    
 }
@@ -237,15 +237,15 @@ if(isset($_GET['price']) || isset($_POST['price'])) {
             </div>
             <div class="box">
                <p>Adults <span>*</span></p>
-               <input type="number" class="input" name="adults" value="<?php echo $adults; ?>" required>
+               <input type="number" class="input" name="adults" value="<?php echo $no_adults; ?>" required>
             </div>
             <div class="box">
                <p>Children</p>
-               <input type="number" class="input" name="child" value="<?php echo $children; ?>" required>
+               <input type="number" class="input" name="child" value="<?php echo $no_children; ?>" required>
             </div>
             <div class="box">
                <p>Rooms <span>*</span></p>
-               <input type="number" class="input" name="rooms" value="<?php echo $rooms; ?>" required>
+               <input type="number" class="input" name="rooms" value="<?php echo $no_rooms; ?>" required>
             </div>
             <!-- <div class="box">
                <p>price <span>*</span></p>
@@ -273,16 +273,16 @@ if(isset($_GET['price']) || isset($_POST['price'])) {
             <div class="room">
                <img src="<?php echo $row['image']; ?>" alt="Room Image">
                <div class="room-content">
-                  <h3><?php echo $row['name']; ?></h3>
+                  <h3><?php echo $row['room_type']; ?></h3>
                   <p><?php echo $row['description']; ?></p>
                   <p class="price">₹<?php echo $row['price']; ?> per night</p>
                   <form action="booking.php" method="GET" onsubmit="return checkLogin(event)">
-                     <input type="hidden" name="room_id" value="<?php echo $row['id']; ?>">
+                     <input type="hidden" name="room_id" value="<?php echo $row['r_id']; ?>">
                      <input type="hidden" name="checkin" value="<?php echo $checkin; ?>">
                      <input type="hidden" name="checkout" value="<?php echo $checkout; ?>">
-                     <input type="hidden" name="adults" value="<?php echo $adults; ?>">
-                     <input type="hidden" name="children" value="<?php echo $children; ?>">
-                     <input type="hidden" name="rooms" value="<?php echo $rooms; ?>">
+                     <input type="hidden" name="adults" value="<?php echo $no_adults; ?>">
+                     <input type="hidden" name="children" value="<?php echo $no_children; ?>">
+                     <input type="hidden" name="rooms" value="<?php echo $no_rooms; ?>">
                      <button type="submit">Book Now</button>
                   </form>
                   <script>

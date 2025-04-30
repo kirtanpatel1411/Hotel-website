@@ -15,7 +15,7 @@ $booking_id = $_GET['booking_id'];
 
 
 
-$sql = "SELECT * FROM booking WHERE id = '$booking_id'";
+$sql = "SELECT * FROM `order` WHERE O_id = '$booking_id'";
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -119,22 +119,21 @@ if (!$booking) {
     <section class="payment-container">
         <h1>Payment for Booking</h1>
         <div class="payment-details">
-            <p><strong>Room Name:</strong> <?php echo htmlspecialchars($booking['room_name']); ?></p>
+            <p><strong>Room Name:</strong> <?php echo htmlspecialchars($booking['room_type']); ?></p>
             <p><strong>Customer Name:</strong> <?php echo htmlspecialchars($booking['customer_name']); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($booking['email']); ?></p>
             <p><strong>Phone:</strong> <?php echo htmlspecialchars($booking['phone']); ?></p>
             <p><strong>Check-In Date:</strong> <?php echo htmlspecialchars($booking['check_in']); ?></p>
             <p><strong>Check-Out Date:</strong> <?php echo htmlspecialchars($booking['check_out']); ?></p>
-            <p><strong>Adults:</strong> <?php echo htmlspecialchars($booking['adults']); ?></p>
-            <p><strong>Children:</strong> <?php echo htmlspecialchars($booking['children']); ?></p>
-            <p><strong>Rooms:</strong> <?php echo htmlspecialchars($booking['rooms']); ?></p>
+            <p><strong>Adults:</strong> <?php echo htmlspecialchars($booking['no_adults']); ?></p>
+            <p><strong>Children:</strong> <?php echo htmlspecialchars($booking['no_children']); ?></p>
+            <p><strong>Rooms:</strong> <?php echo htmlspecialchars($booking['no_rooms']); ?></p>
             <p><strong>Room Charges:</strong> ₹<?php echo number_format($booking['total_price'], 2); ?></p>
             <p><strong>Taxes (5%):</strong> ₹<?php echo number_format($booking['total_price'] * 0.05, 2); ?></p>
-            <p><strong>Status:</strong> <?php echo htmlspecialchars($booking['status']); ?></p>
             <p class="total-amount"><strong>Total Amount:</strong> ₹<?php echo number_format($booking['total_price'] * 1.05, 2); ?></p>
         </div>
         <form action="payment_success.php" method="GET">
-            <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
+            <input type="hidden" name="booking_id" value="<?php echo $booking['O_id']; ?>">
             <input type="hidden" name="total_price" value="<?php echo $booking['total_price'] * 1.05; ?>">
             <button type="submit" class="payment-btn">Pay Now</button>
         </form>

@@ -1,23 +1,26 @@
 <?php
 session_start();
-
 include 'db.php';
 include 'header.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name     = $_POST['name'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // hashed password
+    $city     = $_POST['city'];
+    $address  = $_POST['address'];
+    $email    = $_POST['email'];
+    $phone    = $_POST['phone'];
 
-    $check_email = "SELECT * FROM users WHERE email='$email'";
+    // Check if email already exists
+    $check_email = "SELECT * FROM registration WHERE email='$email'";
     $result = $conn->query($check_email);
 
     if ($result->num_rows > 0) {
         echo "<script>alert('Email already exists!'); window.location.href='register.php';</script>";
     } else {
-        $sql = "INSERT INTO users (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$password')";
-
+        // Insert user
+        $sql = "INSERT INTO registration (name, email, phone, city, address, password) 
+                VALUES ('$name', '$email', '$phone', '$city', '$address', '$password')";
         if ($conn->query($sql) === TRUE) {
             echo "<script>alert('Registration successful! Please login.'); window.location.href='login.php';</script>";
         } else {
@@ -130,24 +133,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container">
             <h2>User Registration</h2>
             <form action="register.php" method="POST">
-                <label>Name:</label>
-                <input type="text" name="name" required>
+    <label>Name:</label>
+    <input type="text" name="name" required>
 
-                <label>Email:</label>
-                <input type="email" name="email" required>
+    <label>Email:</label>
+    <input type="email" name="email" required>
 
-                <label>Phone:</label>
-                <input type="text" name="phone" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number">
+    <label>Phone:</label>
+    <input type="text" name="phone" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number">
 
-                <label>Password:</label>
-                <input type="password" name="password" required>
+    <label>City:</label>
+    <input type="text" name="city" required>
 
-                <button type="submit">Register</button>
+    <label>Address:</label>
+    <input type="text" name="address" required>
 
-                <div class="link">
-                    Already have an account? <a href="login.php">Login</a>
-                </div>
-            </form>
+    <label>Password:</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Register</button>
+
+    <div class="link">
+        Already have an account? <a href="login.php">Login</a>
+    </div>
+</form>
+
         </div>
     </div>
 

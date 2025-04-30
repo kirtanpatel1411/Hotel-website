@@ -20,7 +20,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 
-$sql = "UPDATE booking SET status = 'confirmed' WHERE id = '$booking_id' AND user_id = '$user_id'";
+$sql = "UPDATE `order` SET status = 'confirmed' WHERE O_id = '$booking_id' AND user_id = '$user_id'";
 
 if ($conn->query($sql) === TRUE) {
     echo "<script>

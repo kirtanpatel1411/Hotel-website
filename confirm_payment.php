@@ -14,16 +14,16 @@ $booking_id = $_GET['booking_id'];
 $total_price = $_GET['total_price'];
 
 
-$sql = "SELECT booking.*, 
-               rooms.name AS room_name,
-               payments.payment_id, 
-               payments.payment_method, 
-               payments.payment_status, 
-               payments.amount
-        FROM booking 
-        JOIN rooms ON booking.room_id = rooms.id 
-        INNER JOIN payments ON booking.id = payments.booking_id 
-        WHERE booking.id = '$booking_id'";
+$sql = "SELECT o.*,
+               r.room_type,
+               p.payment_id, 
+               p.payment_method,  
+               p.amount
+        FROM `order` o
+        JOIN rooms r ON o.room_id = r.r_id
+        LEFT JOIN payments p ON o.O_id = p.booking_id
+        WHERE o.O_id = '$booking_id'";
+
 
 $result = $conn->query($sql);
 
@@ -109,15 +109,15 @@ if (!$booking) {
 
          <h1>Payment for Booking</h1>
       </div>
-      <p><strong>Room Name:</strong> <?php echo htmlspecialchars($booking['room_name']); ?></p>
+      <p><strong>Room Name:</strong> <?php echo htmlspecialchars($booking['room_type']); ?></p>
       <p><strong>Customer Name:</strong> <?php echo htmlspecialchars($booking['customer_name']); ?></p>
       <p><strong>Email:</strong> <?php echo htmlspecialchars($booking['email']); ?></p>
       <p><strong>Phone:</strong> <?php echo htmlspecialchars($booking['phone']); ?></p>
       <p><strong>Check-In Date:</strong> <?php echo htmlspecialchars($booking['check_in']); ?></p>
       <p><strong>Check-Out Date:</strong> <?php echo htmlspecialchars($booking['check_out']); ?></p>
-      <p><strong>Adults:</strong> <?php echo htmlspecialchars($booking['adults']); ?></p>
-      <p><strong>Children:</strong> <?php echo htmlspecialchars($booking['children']); ?></p>
-      <p><strong>Rooms:</strong> <?php echo htmlspecialchars($booking['rooms']); ?></p>
+      <p><strong>Adults:</strong> <?php echo htmlspecialchars($booking['no_adults']); ?></p>
+      <p><strong>Children:</strong> <?php echo htmlspecialchars($booking['no_children']); ?></p>
+      <p><strong>Rooms:</strong> <?php echo htmlspecialchars($booking['no_rooms']); ?></p>
       <p><strong>Room Charges:</strong> ₹<?php echo number_format($booking['total_price'], 2); ?></p>
       <p><strong>Taxes (5%):</strong> ₹<?php echo number_format($booking['total_price'] * 0.05, 2); ?></p>
       <p><strong>Total Amount:</strong> ₹<?php echo number_format($total_price); ?></p>
@@ -127,9 +127,9 @@ if (!$booking) {
       <p><strong>Paid Amount:</strong> ₹<?php echo number_format($total_price); ?></p>
 
 
-      <form action="add_to_profile.php" method="POST">
+      <form action="profile.php" method="POST">
          <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-         <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
+         <input type="hidden" name="booking_id" value="<?php echo $booking['O_id']; ?>">
          <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
          <div class="btndiv">
 

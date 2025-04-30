@@ -3,41 +3,45 @@
     include 'db.php';
     include 'header.php';
 
-
+    
+    if (!isset($_SESSION['user_id'])) {
+        echo "<script>alert('Please login first!'); window.location.href='login.php';</script>";
+            exit;
+        }
+    
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $checkin = $_GET['checkin'] ?? "";
         $checkout = $_GET['checkout'] ?? "";
-        $adults = $_GET['adults'] ?? "";
-        $children = $_GET['children'] ?? "";
-        $rooms = $_GET['rooms'] ?? "";
+        $no_adults = $_GET['adults'] ?? "";
+        $no_children = $_GET['children'] ?? "";
+        $no_rooms = $_GET['rooms'] ?? "";
     }
-
+    
     if (isset($_GET['room_id'])) {
-        $room_id = $_GET['room_id'];
-        $sql = "SELECT * FROM rooms WHERE id = '$room_id'";
+        $r_id = $_GET['room_id'];
+        $sql = "SELECT * FROM rooms WHERE r_id = '$r_id'";
         $result = $conn->query($sql);
         $room = $result->fetch_assoc();
     } else {
         echo "<script>alert('No room selected!'); window.location.href='rooms.php';</script>";
         exit;
-    }
-
+    }   
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $user_id = $_SESSION['user_id'];
-        $room_name = $_POST['room_name'];
-        $price = $_POST['price'];
+        // $u_id = $_SESSION['user_id'];
+        $room_type = $_POST['room_type'];
+    
         $customer_name = $_POST['customer_name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $check_in = $_POST['check_in'];
         $check_out = $_POST['check_out'];
-        $adults = $_POST['adults'];
-        $children = $_POST['children'];
-        $rooms = $_POST['rooms'];
+        $no_adults = $_POST['no_adults'];
+        $no_children = $_POST['no_children'];
+        $no_rooms = $_POST['no_rooms'];
         $total_price = $_POST['total_price'];
-        $status = $_POST['status'];
+    
 
-        $sql = "INSERT INTO booking (user_id,room_id,room_name, customer_name, email, phone, check_in, check_out, adults, children, rooms, total_price,status) VALUES ('$user_id','$room_id','$room_name', '$customer_name', '$email','$phone', '$check_in', '$check_out', '$adults', '$children', '$rooms', '$total_price','pending')";
+        $sql = "INSERT INTO `order` (room_id,room_type, customer_name, email, phone, check_in, check_out, no_adults, no_children, no_rooms, total_price) VALUES ('$r_id','$room_type', '$customer_name', '$email','$phone', '$check_in', '$check_out', '$no_adults', '$no_children', '$no_rooms', '$total_price')";
 
         if ($conn->query($sql) === TRUE) {
             $booking_id = $conn->insert_id;
@@ -61,7 +65,7 @@
                 let pricePerNight = parseFloat(document.getElementById('price').value);
                 let checkIn = document.getElementById('check_in').value;
                 let checkOut = document.getElementById('check_out').value;
-                let rooms = parseInt(document.getElementById('rooms').value);
+                let rooms = parseInt(document.getElementById('no_rooms').value);
 
                 if (checkIn && checkOut && !isNaN(pricePerNight) && !isNaN(rooms)) {
                     let checkInDate = new Date(checkIn);
@@ -149,7 +153,7 @@
                     <div class="container">
                         <div class="box">
                             <p>Room Name</p>
-                            <input type="text" class="input" name="room_name" value="<?php echo $room['name']; ?>" readonly>
+                            <input type="text" class="input" name="room_type" value="<?php echo $room['room_type']; ?>" readonly>
                         </div>
                         <div class="box">
                             <p>Price per Night</p>
@@ -177,31 +181,31 @@
                         </div>
                         <div class="box">
                             <p>Adults <span>*</span></p>
-                            <select name="adults" class="input" required>
-                                <option value="1" <?php if ($adults == "1") echo "selected"; ?>>1 Adult</option>
-                                <option value="2" <?php if ($adults == "2") echo "selected"; ?>>2 Adults</option>
-                                <option value="3" <?php if ($adults == "3") echo "selected"; ?>>3 Adults</option>
-                                <option value="4" <?php if ($adults == "4") echo "selected"; ?>>4 Adults</option>
+                            <select name="no_adults" class="input" required>
+                                <option value="1" <?php if ($no_adults == "1") echo "selected"; ?>>1 Adult</option>
+                                <option value="2" <?php if ($no_adults == "2") echo "selected"; ?>>2 Adults</option>
+                                <option value="3" <?php if ($no_adults == "3") echo "selected"; ?>>3 Adults</option>
+                                <option value="4" <?php if ($no_adults == "4") echo "selected"; ?>>4 Adults</option>
                             </select>
                         </div>
                         <div class="box">
                             <p>Children</p>
-                            <select name="children" class="input" required>
+                            <select name="no_children" class="input" required>
 
-                                <option value="1" <?php if ($children == "1") echo "selected"; ?>>1 Child</option>
-                                <option value="2" <?php if ($children == "2") echo "selected"; ?>>2 Children</option>
-                                <option value="3" <?php if ($children == "3") echo "selected"; ?>>3 Children</option>
-                                <option value="4" <?php if ($children == "4") echo "selected"; ?>>4 Children</option>
+                                <option value="1" <?php if ($no_children == "1") echo "selected"; ?>>1 Child</option>
+                                <option value="2" <?php if ($no_children == "2") echo "selected"; ?>>2 Children</option>
+                                <option value="3" <?php if ($no_children == "3") echo "selected"; ?>>3 Children</option>
+                                <option value="4" <?php if ($no_children == "4") echo "selected"; ?>>4 Children</option>
 
                             </select>
                         </div>
                         <div class="box">
                             <p>Rooms <span>*</span></p>
-                            <select name="rooms" class="input" id="rooms" required onchange="calculateTotal()">
-                                <option value="1" <?php if ($rooms == "1") echo "selected"; ?>>1 Room</option>
-                                <option value="2" <?php if ($rooms == "2") echo "selected"; ?>>2 Rooms</option>
-                                <option value="3" <?php if ($rooms == "3") echo "selected"; ?>>3 Rooms</option>
-                                <option value="4" <?php if ($rooms == "4") echo "selected"; ?>>4 Rooms</option>
+                            <select name="no_rooms" class="input" id="no_rooms" required onchange="calculateTotal()">
+                                <option value="1" <?php if ($no_rooms == "1") echo "selected"; ?>>1 Room</option>
+                                <option value="2" <?php if ($no_rooms == "2") echo "selected"; ?>>2 Rooms</option>
+                                <option value="3" <?php if ($no_rooms == "3") echo "selected"; ?>>3 Rooms</option>
+                                <option value="4" <?php if ($no_rooms == "4") echo "selected"; ?>>4 Rooms</option>
                             </select>
                         </div>
                         <div class="box">
