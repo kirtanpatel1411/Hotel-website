@@ -47,7 +47,6 @@
       <div class="share">
          <a href="https://www.facebook.com/Courtyardsurat/" class="fab fa-facebook-f"></a>
          <a href="https://www.instagram.com/courtyardmarriottsurat/" class="fab fa-instagram"></a>
-         <!-- <a href="#" class="fab fa-twitter"></a> -->
          <a href="https://in.pinterest.com/pin/880664902127439501/" class="fab fa-pinterest"></a>
       </div>
 
