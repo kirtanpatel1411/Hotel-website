@@ -9,29 +9,33 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+
+
+
+
+
 $user_id = $_SESSION['user_id'];
-$query = "SELECT * FROM registration WHERE u_id='$user_id'";
+$query = "SELECT * FROM `registration` WHERE u_id='$user_id'";
 $result = $conn->query($query);
 $user = $result->fetch_assoc();
 
-$sql = "SELECT `order`.*, rooms.room_type AS room_type FROM `order` 
-        JOIN rooms ON `order`.room_id = rooms.r_id 
-        WHERE `order`.u_id = '$user_id'";
 
-$result = $conn->query($sql);
+$sql1 = "SELECT * FROM `order` WHERE u_id='$user_id'";
+
+$result1 = $conn->query($sql1);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $city=$_POST['city'];
-    $address=$_POST['address'];
+    $username = $_POST['username'];
+    $city = $_POST['city'];
+    $address = $_POST['address'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
 
-    $update_query = "UPDATE registration SET name='$name', city='$city', address='$address' email='$email', phone='$phone' WHERE u_id='$user_id'";
+    $update_query = "UPDATE `registration` SET name='$name', city='$city', address='$address', email='$email', phone='$phone' WHERE u_id='$user_id'";
 
     if ($conn->query($update_query) === TRUE) {
-        $_SESSION['name'] = $name;
+
         echo "<script>alert('Profile updated successfully!'); window.location.href='profile.php';</script>";
     } else {
         echo "<script>alert('Error updating profile!');</script>";
@@ -58,21 +62,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .profile-container {
             position: absolute;
             top: 101px;
-            right: 0px;
-            width: 300px;
+            right: 10px;
+            width: 600px;
             background: white;
             padding: 20px;
-            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid black;
             text-align: center;
         }
 
         .profile-container h2 {
             color: #A66914;
             margin-bottom: 10px;
-            font-size: 24px;
-            border-bottom: 2px solid #A66914;
+            font-size: 34px;
             padding-bottom: 5px;
         }
 
@@ -91,8 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         input {
             padding: 8px;
             margin: 5px 0;
-            border: 1px solid black;
-            border-radius: 5px;
+            border: 1PX solid #8A5410;
             width: 100%;
         }
 
@@ -129,10 +129,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background: #c9302c;
         }
 
+        .maincontainer {
+            height: 900px;
+            display: flex;
+            justify-content: left;
+            align-items: flex-start;
+        }
 
         .bookings-container {
-            max-width: 815px;
-            margin: 128px 150px;
+            width: 900px;
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -219,13 +224,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="profile-container">
         <h2>My Profile</h2>
         <form action="profile.php" method="POST">
-            <label>Name:</label>
-            <input type="text" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
+            <label>User Name:</label>
+            <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
             <label>City:</label>
             <input type="text" name="city" value="<?php echo htmlspecialchars($user['city']); ?>" required>
             <label>Address:</label>
             <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" required>
-            
+
             <label>Email:</label>
             <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
 
@@ -239,54 +244,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="logout.php">Logout</a>
         </div>
     </div>
+    <div class="maincontainer">
 
 
-    <div class="bookings-container">
-        <h2>My Bookings</h2>
-        <table>
-            <tr>
-                <th>Room</th>
-                <th>Check-In</th>
-                <th>Check-Out</th>
-                <th>Total Price</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-
-            <?php while ($row = $result->fetch_assoc()) { ?>
+        <div class="bookings-container">
+            <h2>My Bookings</h2>
+            <table>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['room_type']); ?></td>
-                    <td><?php echo htmlspecialchars($row['check_in']); ?></td>
-                    <td><?php echo htmlspecialchars($row['check_out']); ?></td>
-                    <td>₹<?php echo number_format($row['total_price'] * 1.05, 2); ?></td>
-                    <td class="status <?php echo strtolower($row['status']); ?>">
-                        <?php echo ucfirst($row['status']); ?>
-                    </td>
-                    <td>
+                    <th>Name</th>
+                    <th>Room</th>
+                    <th>Check-In</th>
+                    <th>Check-Out</th>
+                    <th>Total Price</th>
 
-                        <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-
-                            <form action="cancel_booking.php" method="POST">
-                                <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="btn-cancel">Cancel</button>
-                            </form>
-
-
-                            <form action="bill.php" method="POST">
-                                <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
-                                <input type="hidden" name="total_price" value="<?php echo $row['total_price']; ?>">
-                                <button type="submit" class="btn-bill">Receipt</button>
-                            </form>
-                        </div>
-                    </td>
-
-
-
-
+                    <th>Action</th>
                 </tr>
-            <?php } ?>
 
-        </table>
+                <?php while ($row1 = $result1->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row1['customer_name']); ?></td>
+                        <td><?php echo htmlspecialchars($row1['room_type']); ?></td>
+                        <td><?php echo htmlspecialchars($row1['check_in']); ?></td>
+                        <td><?php echo htmlspecialchars($row1['check_out']); ?></td>
+                        <td>₹<?php echo number_format($row1['total_price'] * 1.05, 2); ?></td>
+
+                        </td>
+                        <td>
+
+                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+
+                                <form action="cancel_booking.php" method="POST">
+                                    <input type="hidden" name="booking_id" value="<?php echo $row1['O_id']; ?>">
+                                    <button type="submit" class="btn-cancel">Cancel</button>
+                                </form>
+
+
+                                <form action="bill.php" method="POST">
+                                    <input type="hidden" name="booking_id" value="<?php echo $row1['O_id']; ?>">
+                                    <input type="hidden" name="total_price" value="<?php echo $row1['total_price']; ?>">
+                                    <button type="submit" class="btn-bill">Receipt</button>
+                                </form>
+                            </div>
+                        </td>
+
+
+
+
+                    </tr>
+                <?php } ?>
+
+            </table>
+        </div>
     </div>
 
     <?php include 'footer.php'; ?>

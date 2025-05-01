@@ -3,12 +3,12 @@
     include 'db.php';
     include 'header.php';
 
-    
+
     if (!isset($_SESSION['user_id'])) {
         echo "<script>alert('Please login first!'); window.location.href='login.php';</script>";
-            exit;
-        }
-    
+        exit;
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $checkin = $_GET['checkin'] ?? "";
         $checkout = $_GET['checkout'] ?? "";
@@ -16,7 +16,7 @@
         $no_children = $_GET['children'] ?? "";
         $no_rooms = $_GET['rooms'] ?? "";
     }
-    
+
     if (isset($_GET['room_id'])) {
         $r_id = $_GET['room_id'];
         $sql = "SELECT * FROM rooms WHERE r_id = '$r_id'";
@@ -25,11 +25,11 @@
     } else {
         echo "<script>alert('No room selected!'); window.location.href='rooms.php';</script>";
         exit;
-    }   
+    }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // $u_id = $_SESSION['user_id'];
+        $u_id = $_SESSION['user_id'];
         $room_type = $_POST['room_type'];
-    
+
         $customer_name = $_POST['customer_name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
@@ -39,13 +39,13 @@
         $no_children = $_POST['no_children'];
         $no_rooms = $_POST['no_rooms'];
         $total_price = $_POST['total_price'];
-    
 
-        $sql = "INSERT INTO `order` (room_id,room_type, customer_name, email, phone, check_in, check_out, no_adults, no_children, no_rooms, total_price) VALUES ('$r_id','$room_type', '$customer_name', '$email','$phone', '$check_in', '$check_out', '$no_adults', '$no_children', '$no_rooms', '$total_price')";
+
+        $sql = "INSERT INTO `order` (u_id,room_id,room_type, customer_name, email, phone, check_in, check_out, no_adults, no_children, no_rooms, total_price) VALUES ('$u_id','$r_id','$room_type', '$customer_name', '$email','$phone', '$check_in', '$check_out', '$no_adults', '$no_children', '$no_rooms', '$total_price')";
 
         if ($conn->query($sql) === TRUE) {
             $booking_id = $conn->insert_id;
-            header("Location: payment.php?booking_id=$booking_id");
+            header("Location: booking_confirm.php?booking_id=$booking_id");
             exit;
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;

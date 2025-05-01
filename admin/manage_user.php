@@ -3,7 +3,7 @@ include '../db.php';
 include 'sidebar.php';
 
 
-$result = $conn->query("SELECT * FROM users");
+$result = $conn->query("SELECT * FROM registration");
 ?>
 
 <!DOCTYPE html>
@@ -72,18 +72,24 @@ $result = $conn->query("SELECT * FROM users");
         <table>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>UserName</th>
+                <th>City</th>
+                <th>Address</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Created_at</th>
+                <th>Type</th>
+
             </tr>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['u_id']; ?></td>
+                    <td><?php echo $row['username']; ?></td>
+                    <td><?php echo $row['city']; ?></td>
+                    <td><?php echo $row['address']; ?></td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['phone']; ?></td>
-                    <td><?php echo $row['created_at']; ?></td>
+                    <td><?php echo $row['user_type']; ?></td>
+
                 </tr>
             <?php } ?>
         </table>

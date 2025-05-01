@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
 }
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $conn->query("DELETE FROM gallery WHERE id=$id");
+    $conn->query("DELETE FROM gallery WHERE g_id=$id");
     echo "<script>
     alert('image deleted successfully!');
     window.location.href = 'add_gallery.php'; // Redirect to home page
@@ -219,10 +219,10 @@ $result = $conn->query("SELECT * FROM gallery");
             </tr>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <tr>
-                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['g_id']; ?></td>
                     <td><img src="../<?php echo $row['image']; ?>" width="100"></td>
                     <td>
-                        <a href="add_gallery.php?delete=<?php echo $row['id']; ?>" class="delete-btn">Delete</a>
+                        <a href="add_gallery.php?delete=<?php echo $row['g_id']; ?>" class="delete-btn">Delete</a>
                     </td>
                 </tr>
             <?php } ?>

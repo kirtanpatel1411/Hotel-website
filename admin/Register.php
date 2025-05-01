@@ -1,22 +1,29 @@
 <?php
+session_start();
 include '../db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $city     = $_POST['city'];
+    $address  = $_POST['address'];
+    $email    = $_POST['email'];
+    $phone    = $_POST['phone'];
+    $user_type = $_POST['user_type'];
 
-    $sql = "INSERT INTO admin_users (username, email, password) VALUES ('$username', '$email', '$password')";
+    $check_email = "SELECT * FROM registration WHERE email='$email'";
+    $result = $conn->query($check_email);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>
-                alert('Registration successful! Redirecting to login...');
-                window.location.href = 'login.php';
-              </script>";
+    if ($result->num_rows > 0) {
+        echo "<script>alert('Email already exists!'); window.location.href='register.php';</script>";
     } else {
-        echo "<script>
-                alert('Error: " . $conn->error . "');
-              </script>";
+        $sql = "INSERT INTO registration (username, email, phone, city, address, password, user_type) 
+                VALUES ('$username', '$email', '$phone', '$city', '$address', '$password', '$user_type')";
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>alert('Registration successful! Please login.'); window.location.href='login.php';</script>";
+        } else {
+            echo "<script>alert('Error: Could not register. Try again.');</script>";
+        }
     }
 }
 ?>
@@ -27,75 +34,172 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Register</title>
+    <title>User Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px;
         }
 
+
         .container {
+            width: 550px;
             background: white;
-            padding: 90px;
-            border: 7px solid black;
-            border-radius: 10px;
+            padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 300px;
+            border: 2px solid black;
         }
 
         h2 {
             color: #343A40;
+            font-size: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            text-align: left;
+            font-size: 20px;
+
         }
 
         input {
-            width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border: 3px solid black;
-            border-radius: 15px;
+            margin: 5px 0;
+            border: 1px solid black;
+
         }
 
-        button {
-            background-color: #343A40;
-            color: white;
-            padding: 10px;
-            border: none;
-            width: 100%;
-            border-radius: 5px;
+        .radio-group {
+            display: flex;
+            justify-content: flex-start;
+            gap: 30px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
             cursor: pointer;
         }
 
-
-
-        p a {
-            color: red;
-            text-decoration: none;
+        .radio-option input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+            cursor: pointer;
         }
 
-        p a:hover {
+        .row-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        button {
+            background: #343A40;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #8A5410;
+        }
+
+        .link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #343A40;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h2>Admin Registration</h2>
-        <form method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Register</button>
-            <p>Already have an account? <a href="login.php">Login</a></p>
-        </form>
 
+    <div class="main-content">
+        <div class="container">
+            <h2>Admin Registration</h2>
+            <form action="register.php" method="POST">
+
+                <label>User Type:</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="user_type" value="user" required checked>
+                        <span>User</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="user_type" value="admin" required>
+                        <span>Admin</span>
+                    </label>
+                </div>
+
+                <label>UserName:</label>
+                <input type="text" name="username" required>
+
+                <label>Email:</label>
+                <input type="email" name="email" required>
+
+                <div class="row-group">
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" name="phone" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number">
+                    </div>
+                    <div class="form-group">
+                        <label>City:</label>
+                        <input type="text" name="city" required>
+                    </div>
+                </div>
+                <label>Address:</label>
+                <input type="text" name="address" required>
+
+                <label>Password:</label>
+                <input type="password" name="password" required>
+
+                <button type="submit">Register</button>
+
+                <div class="link">
+                    Already have an account? <a href="login.php">Login</a>
+                </div>
+            </form>
+
+        </div>
     </div>
+
 </body>
 
 </html>

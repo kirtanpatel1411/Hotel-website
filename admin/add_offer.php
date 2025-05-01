@@ -7,14 +7,14 @@ include '../db.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_offer'])) {
-    $title = $_POST['title'];
+   
     $description = $_POST['description'];
-    $discount_percentage = $_POST['discount_percentage'];
+
     $valid_until = $_POST['valid_until'];
 
 
-    $sql = "INSERT INTO offers (title, description,  discount_percentage,valid_until) 
-                    VALUES ('$title', '$description','$discount_percentage','$valid_until')";
+    $sql = "INSERT INTO offers ( description, valid_until) 
+                    VALUES ( '$description','$valid_until')";
     if ($conn->query($sql)) {
         echo "<script>alert('Offer added successfully!'); window.location.href='add_offer.php';</script>";
     } else {
@@ -30,12 +30,12 @@ if (isset($_GET['delete'])) {
 
 
 
-    $conn->query("DELETE FROM offers WHERE id='$id'");
+    $conn->query("DELETE FROM offers WHERE o_id='$id'");
     echo "<script>alert('Offer deleted successfully!'); window.location.href='add_offer.php';</script>";
 }
 
 
-$offers = $conn->query("SELECT * FROM offers ORDER BY id DESC");
+$offers = $conn->query("SELECT * FROM offers ORDER BY o_id DESC");
 ?>
 <?php include 'sidebar.php'; ?>
 
@@ -171,9 +171,9 @@ $offers = $conn->query("SELECT * FROM offers ORDER BY id DESC");
         <h1>Manage Offers</h1>
 
         <form action="" method="POST" enctype="multipart/form-data">
-            <input type="text" name="title" placeholder="Offer Title" required>
+        
             <textarea name="description" placeholder="Offer Description" required></textarea>
-            <input type="number" name="discount_percentage" placeholder="Discount %" required>
+    
 
             <input type="date" name="valid_until" required>
             <button type="submit" name="add_offer">Add Offer</button>
@@ -184,19 +184,20 @@ $offers = $conn->query("SELECT * FROM offers ORDER BY id DESC");
         <table>
             <tr>
                 <th>ID</th>
-                <th>Title</th>
                 <th>Description</th>
-                <th>Discount (%)</th>
+                <th>Valid</th>
+                
                 <th>Action</th>
             </tr>
             <?php while ($row = $offers->fetch_assoc()) { ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['title']); ?></td>
+                    <td><?php echo htmlspecialchars($row['o_id']); ?></td>
+                    
                     <td><?php echo htmlspecialchars($row['description']); ?></td>
-                    <td style="color: red;"><?php echo htmlspecialchars($row['discount_percentage']); ?>%</td>
+                    <td><?php echo htmlspecialchars($row['valid_until']); ?></td>
+                    
                     <td>
-                        <a href="?delete=<?php echo $row['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</a>
+                        <a href="?delete=<?php echo $row['o_id']; ?>" class="delete-btn" onclick="return confirm('Are you sure?');">Delete</a>
                     </td>
                 </tr>
             <?php } ?>

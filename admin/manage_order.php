@@ -2,7 +2,7 @@
 include '../db.php';
 include 'sidebar.php';
 
-$result = $conn->query("SELECT * FROM booking");
+$result = $conn->query("SELECT * FROM `order`");
 ?>
 
 
@@ -120,8 +120,10 @@ $result = $conn->query("SELECT * FROM booking");
             <table border="1">
                 <tr>
                     <th>ID</th>
+
+                    <th>User_id</th>
                     <th>Room_id</th>
-                    <th>Room_name</th>
+                    <th>Room_type</th>
                     <th>Castomer_name</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -131,23 +133,24 @@ $result = $conn->query("SELECT * FROM booking");
                     <th>Children</th>
                     <th>Rooms</th>
                     <th>Total_price</th>
-                    <th>status</th>
+
                 </tr>
                 <?php while ($row = $result->fetch_assoc()) { ?>
                     <tr>
-                        <td><?= $row['id'] ?></td>
+                        <td><?= $row['O_id'] ?></td>
+                        <td><?= $row['u_id'] ?></td>
                         <td><?= $row['room_id'] ?></td>
-                        <td><?= $row['room_name'] ?></td>
+                        <td><?= $row['room_type'] ?></td>
                         <td><?= $row['customer_name'] ?></td>
                         <td><?= $row['email'] ?></td>
                         <td><?= $row['phone'] ?></td>
                         <td><?= $row['check_in'] ?></td>
                         <td><?= $row['check_out'] ?></td>
-                        <td><?= $row['adults'] ?></td>
-                        <td><?= $row['children'] ?></td>
-                        <td><?= $row['rooms'] ?></td>
+                        <td><?= $row['no_adults'] ?></td>
+                        <td><?= $row['no_children'] ?></td>
+                        <td><?= $row['no_rooms'] ?></td>
                         <td><?= $row['total_price'] ?></td>
-                        <td><?= $row['status'] ?></td>
+
                     </tr>
                 <?php } ?>
             </table>

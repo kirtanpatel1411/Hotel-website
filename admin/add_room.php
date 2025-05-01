@@ -12,28 +12,28 @@ if (!is_dir($uploadDir)) {
 
 
 $editMode = false;
-$roomId = $name = $description = $price = $status = $image = "";
+$roomId = $room_type = $description = $price = $image = "";
 
 
 if (isset($_GET['edit'])) {
     $editMode = true;
     $roomId = $_GET['edit'];
-    $result = $conn->query("SELECT * FROM rooms WHERE id = $roomId");
+    $result = $conn->query("SELECT * FROM rooms WHERE r_id = $roomId");
     if ($row = $result->fetch_assoc()) {
-        $name = $row['name'];
+        $room_type = $row['room_type'];
         $description = $row['description'];
         $price = $row['price'];
-        $status = $row['status'];
+
         $image = $row['image'];
     }
 }
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
+    $room_type = $_POST['room_type'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    $status = $_POST['status'];
+
 
 
     if (!empty($_FILES['image']['name'])) {
@@ -47,12 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['room_id']) && $_POST['room_id'] != "") {
         $roomId = $_POST['room_id'];
-        $sql = "UPDATE rooms SET name='$name', description='$description', price='$price', image='$image', status='$status' WHERE id=$roomId";
+        $sql = "UPDATE rooms SET room_type='$room_type', description='$description', price='$price', image='$image' WHERE r_id=$roomId";
         $conn->query($sql);
         echo "<script>alert('Room update successfully !'); window.location.href='add_room.php';</script>";
     } else {
 
-        $sql = "INSERT INTO rooms (name, description, price, image, status) VALUES ('$name', '$description', '$price', '$image', '$status')";
+        $sql = "INSERT INTO rooms (room_type, description, price, image) VALUES ('$room_type', '$description', '$price', '$image')";
         $conn->query($sql);
         echo "<script>
     alert('Room added successfully!');
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $conn->query("DELETE FROM rooms WHERE id=$id");
+    $conn->query("DELETE FROM rooms WHERE r_id=$id");
     echo "<script>
     alert('Room deleted successfully!');
     window.location.href = 'add_room.php'; // Redirect to home page
@@ -278,8 +278,8 @@ $result = $conn->query("SELECT * FROM rooms");
             <h3><?php echo $editMode ? "Edit Room" : "Add New Room"; ?></h3>
             <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="room_id" value="<?php echo $editMode ? $roomId : ''; ?>">
-                <label>Room Name:</label>
-                <input type="text" name="name" required value="<?php echo $name; ?>">
+                <label>Room type:</label>
+                <input type="text" name="room_type" required value="<?php echo $room_type; ?>">
 
                 <label>Room Description:</label>
                 <textarea name="description" required><?php echo $description; ?></textarea>
@@ -296,11 +296,7 @@ $result = $conn->query("SELECT * FROM rooms");
                     </div>
                 <?php } ?>
 
-                <label>Status:</label>
-                <select name="status">
-                    <option value="Available" <?php echo ($status == 'Available') ? 'selected' : ''; ?>>Available</option>
-                    <option value="Booked" <?php echo ($status == 'Booked') ? 'selected' : ''; ?>>Booked</option>
-                </select>
+
 
                 <button type="submit"><?php echo $editMode ? "Update Room" : "Add Room"; ?></button>
             </form>
@@ -312,24 +308,24 @@ $result = $conn->query("SELECT * FROM rooms");
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Room type</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Image</th>
-                    <th>Status</th>
+
                     <th>Actions</th>
                 </tr>
                 <?php while ($row = $result->fetch_assoc()) { ?>
                     <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['r_id']; ?></td>
+                        <td><?php echo $row['room_type']; ?></td>
                         <td><?php echo $row['description']; ?></td>
                         <td>₹<?php echo $row['price']; ?></td>
                         <td><img src="../<?php echo $row['image']; ?>" width="80"></td>
-                        <td><?php echo $row['status']; ?></td>
+
                         <td class="action-buttons">
-                            <a href="add_room.php?edit=<?php echo $row['id']; ?>" class="update-btn">Edit</a>
-                            <a href="add_room.php?delete=<?php echo $row['id']; ?>" class="delete-btn">Delete</a>
+                            <a href="add_room.php?edit=<?php echo $row['r_id']; ?>" class="update-btn">Edit</a>
+                            <a href="add_room.php?delete=<?php echo $row['r_id']; ?>" class="delete-btn">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>

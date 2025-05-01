@@ -1,98 +1,94 @@
 <?php
-include '../db.php';
 session_start();
+include '../db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM admin_users WHERE username='$username'";
+    $sql = "SELECT * FROM registration WHERE username='$username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
-            $_SESSION['admin'] = $username;
-            header("Location: dashboard.php");
-            exit;
+
+            echo "<script>alert('Welcome Admin!'); window.location.href='dashboard.php';</script>";
         } else {
-            echo "";
+            echo "<script>alert('Invalid password');</script>";
         }
     } else {
-        echo "";
+        echo "<script>alert('No user found with this email');</script>";
     }
 }
 ?>
 
+<!-- HTML form -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             background-color: #f4f4f4;
+        }
+
+        .heading {
+            height: 100PX;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
 
         .container {
+            width: 400px;
+            height: 300px;
+            margin: 100px auto;
             background: white;
-            padding: 90px;
-            border: 7px solid black;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+
             text-align: center;
-            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid black;
         }
 
         h2 {
-            color: #343A40;
+            font-size: 30px;
         }
 
-        input {
-            width: 100%;
+        input,
+        button {
+            width: 90%;
             padding: 10px;
             margin: 10px 0;
-            border: 3px solid black;
-            border-radius: 15px;
+            border: 2px solid #343A40;
         }
 
         button {
             background-color: #343A40;
             color: white;
-            padding: 10px;
             border: none;
-            width: 100%;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
-       
-
-        p a {
-            color: red;
-            text-decoration: none;
-        }
-
-        p a:hover {
-            text-decoration: underline;
+        button:hover {
+            background-color: #343A40;
         }
     </style>
 </head>
 
 <body>
+    <div class="heading">
+
+        <h1>Admin Login</h1>
+    </div>
     <div class="container">
-        <h2>Admin Login</h2>
-        <form method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
+        <h2 style="color:#343A40;">Login</h2>
+        <form action="login.php" method="POST">
+            <input type="name" name="username" required placeholder="Enter your username">
+            <input type="password" name="password" required placeholder="Enter your password">
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="register.php">Register</a></p>

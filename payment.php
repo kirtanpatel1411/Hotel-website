@@ -4,32 +4,48 @@ session_start();
 include 'db.php';
 include 'header.php';
 
-
 if (!isset($_GET['booking_id']) || empty($_GET['booking_id'])) {
     echo "<script>alert('Invalid Booking ID!'); window.location.href='index.php';</script>";
     exit;
 }
 
 $booking_id = $_GET['booking_id'];
+$total_price = $_GET['total_price'];
+$payment_status = "Completed"; 
 
-
+$payment_id = "PAY-" . rand(1000, 9999);
 
 
 $sql = "SELECT * FROM `order` WHERE O_id = '$booking_id'";
 $result = $conn->query($sql);
-
-if (!$result) {
-    die("Database Query Failed: " . $conn->error);
-}
-
 $booking = $result->fetch_assoc();
+
 if (!$booking) {
     echo "<script>alert('Booking not found!'); window.location.href='index.php';</script>";
     exit;
 }
 
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $customer_name = $_POST['customer_name'];
+    $amount = $_POST['amount'];
+    $payment_method = $_POST['payment_method'];
 
+    $sql = "INSERT INTO payments (booking_id,payment_id, customer_name, amount, payment_method, payment_status) 
+            VALUES ('$booking_id','$payment_id', '$customer_name', '$amount', '$payment_method', '$payment_status')";
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>
+        alert('Payment Successful! Payment ID: $payment_id');
+       window.location.href='processing_payment.php?booking_id=$booking_id&total_price=$total_price';
+
+    </script>";
+    } else {
+        echo "<script>
+        alert('Payment Failed: " . $conn->error . "');
+        window.history.back();
+    </script>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,108 +56,122 @@ if (!$booking) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding-top: 80px;
-        }
-
         .payment-container {
-            max-width: 600px;
+            max-width: 500px;
             background: #fff;
             padding: 25px;
-            margin: 20px auto;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
+            text-align: center;
+            margin: 50px auto;
         }
 
-        .payment-container h1 {
+        .payment-container h2 {
             color: #A66914;
-            font-size: 26px;
-            text-align: center;
+            font-size: 24px;
             margin-bottom: 20px;
             font-weight: 600;
         }
 
-        .payment-details {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .box {
+            margin-bottom: 15px;
+            text-align: left;
         }
 
-        .payment-details p {
-            font-size: 20px;
+        .box p {
+            font-size: 16px;
+            font-weight: 500;
             color: #333;
-            padding: 8px 0;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 5px;
         }
 
-        .payment-details p strong {
-            color: #A66914;
-        }
-
-        .total-amount {
-            font-size: 18px;
-            font-weight: bold;
-            color: #A66914;
-            margin-top: 15px;
-        }
-
-        .payment-btn {
-            display: block;
+        .input {
             width: 100%;
-            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button {
+            width: 100%;
             background: #A66914;
             color: white;
             padding: 12px;
-            border-radius: 6px;
+            border: none;
+            border-radius: 5px;
             font-size: 18px;
             font-weight: 600;
-            border: none;
             cursor: pointer;
             margin-top: 20px;
             transition: background 0.3s ease;
         }
 
-        .payment-btn:hover {
+        button:hover {
             background: #8A5410;
+        }
+
+        .btn {
+            background: #555;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #333;
         }
     </style>
 </head>
 
 <body>
-    <section class="payment-container">
-        <h1>Payment for Booking</h1>
-        <div class="payment-details">
-            <p><strong>Room Name:</strong> <?php echo htmlspecialchars($booking['room_type']); ?></p>
-            <p><strong>Customer Name:</strong> <?php echo htmlspecialchars($booking['customer_name']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($booking['email']); ?></p>
-            <p><strong>Phone:</strong> <?php echo htmlspecialchars($booking['phone']); ?></p>
-            <p><strong>Check-In Date:</strong> <?php echo htmlspecialchars($booking['check_in']); ?></p>
-            <p><strong>Check-Out Date:</strong> <?php echo htmlspecialchars($booking['check_out']); ?></p>
-            <p><strong>Adults:</strong> <?php echo htmlspecialchars($booking['no_adults']); ?></p>
-            <p><strong>Children:</strong> <?php echo htmlspecialchars($booking['no_children']); ?></p>
-            <p><strong>Rooms:</strong> <?php echo htmlspecialchars($booking['no_rooms']); ?></p>
-            <p><strong>Room Charges:</strong> ₹<?php echo number_format($booking['total_price'], 2); ?></p>
-            <p><strong>Taxes (5%):</strong> ₹<?php echo number_format($booking['total_price'] * 0.05, 2); ?></p>
-            <p class="total-amount"><strong>Total Amount:</strong> ₹<?php echo number_format($booking['total_price'] * 1.05, 2); ?></p>
-        </div>
-        <form action="payment_success.php" method="GET">
-            <input type="hidden" name="booking_id" value="<?php echo $booking['O_id']; ?>">
-            <input type="hidden" name="total_price" value="<?php echo $booking['total_price'] * 1.05; ?>">
-            <button type="submit" class="payment-btn">Pay Now</button>
+
+    <div class="payment-container">
+        <h2>Payment Details</h2>
+        <form action="" method="POST">
+            <div class="box">
+                <p>Booking ID:</p>
+                <input type="text" class="input" name="booking_id" value="<?php echo htmlspecialchars($booking['O_id']); ?>" readonly>
+            </div>
+            <div class="box">
+                <p>Customer Name:</p>
+                <input type="text" class="input" name="customer_name" value="<?php echo htmlspecialchars($booking['customer_name']); ?>" readonly>
+            </div>
+            <div class="box">
+                <p>Amount:</p>
+                <input type="text" class="input" name="amount" value="<?php echo htmlspecialchars($total_price); ?>" readonly>
+            </div>
+            <label>Payment Method:</label>
+            <select name="payment_method" required>
+                <option value="Card">Card</option>
+                </option>
+                <option value="Net Banking">Net Banking
+                <option value="UPI">UPI</option>
+                <option value="Cash">Cash</option>
+            </select>
+            <button type="submit" name="pay_now">Pay Now</button>
         </form>
 
-    </section>
+
+    </div>
+
+    <?php
+    include 'footer.php';
+    ?>
 
 </body>
 
 </html>
-
-<?php include 'footer.php'; ?>

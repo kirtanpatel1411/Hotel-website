@@ -4,16 +4,20 @@ session_start();
 include 'db.php';
 include 'header.php';
 
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('Please login first!'); window.location.href='login.php';</script>";
+    exit;
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $u_id = $_SESSION['user_id'];
     $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $visit_date = !empty($_POST['visit_date']) ? $_POST['visit_date'] : NULL;
-    $rating = $_POST['rating'];
+
     $message = $_POST['message'];
 
-    $sql = "INSERT INTO feedback (name, email, phone, visit_date, rating, message) 
-            VALUES ('$name', '$email', '$phone', " . ($visit_date ? "'$visit_date'" : "NULL") . ", '$rating', '$message')";
+    $sql = "INSERT INTO feedback (U_id,name, message) 
+            VALUES ('$u_id','$name','$message')";
 
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Thank you for your feedback!'); window.location.href='feedback.php';</script>";
@@ -174,25 +178,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Give Your Feedback</h2>
             <label>Name:</label>
             <input type="text" name="name" id="name" required>
-
-            <label>Email:</label>
-            <input type="email" name="email" id="email" required>
-
-            <label>Phone:</label>
-            <input type="text" name="phone" id="phone" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number">
-
-            <label>Visit Date (Optional):</label>
-            <input type="date" name="visit_date" id="visit_date">
-
-            <label>Rating:</label>
-            <div id="rating">
-                <span onclick="setRating(1)">⭐</span>
-                <span onclick="setRating(2)">⭐</span>
-                <span onclick="setRating(3)">⭐</span>
-                <span onclick="setRating(4)">⭐</span>
-                <span onclick="setRating(5)">⭐</span>
-            </div>
-            <input type="hidden" name="rating" id="rating-value">
 
             <label>Feedback:</label>
             <textarea name="message" id="message" required></textarea>

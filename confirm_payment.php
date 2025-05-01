@@ -4,38 +4,19 @@ include 'header.php';
 
 include 'db.php';
 
-
-if (!isset($_GET['booking_id']) || empty($_GET['booking_id'])) {
-   echo "<script>alert('Invalid Booking ID!'); window.location.href='index.php';</script>";
-   exit;
-}
-
 $booking_id = $_GET['booking_id'];
-$total_price = $_GET['total_price'];
 
 
-$sql = "SELECT o.*,
-               r.room_type,
-               p.payment_id, 
-               p.payment_method,  
-               p.amount
-        FROM `order` o
-        JOIN rooms r ON o.room_id = r.r_id
-        LEFT JOIN payments p ON o.O_id = p.booking_id
-        WHERE o.O_id = '$booking_id'";
-
-
+$sql = "SELECT * FROM payments WHERE booking_id = '$booking_id' ORDER BY id DESC LIMIT 1";
 $result = $conn->query($sql);
+$payment = $result->fetch_assoc();
 
-if (!$result) {
-   die("Database Query Failed: " . $conn->error);
-}
-
-$booking = $result->fetch_assoc();
-if (!$booking) {
-   echo "<script>alert('Booking not found!'); window.location.href='index.php';</script>";
+if (!$payment) {
+   echo "<script>alert('No payment found!'); window.location.href='index.php';</script>";
    exit;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,33 +90,18 @@ if (!$booking) {
 
          <h1>Payment for Booking</h1>
       </div>
-      <p><strong>Room Name:</strong> <?php echo htmlspecialchars($booking['room_type']); ?></p>
-      <p><strong>Customer Name:</strong> <?php echo htmlspecialchars($booking['customer_name']); ?></p>
-      <p><strong>Email:</strong> <?php echo htmlspecialchars($booking['email']); ?></p>
-      <p><strong>Phone:</strong> <?php echo htmlspecialchars($booking['phone']); ?></p>
-      <p><strong>Check-In Date:</strong> <?php echo htmlspecialchars($booking['check_in']); ?></p>
-      <p><strong>Check-Out Date:</strong> <?php echo htmlspecialchars($booking['check_out']); ?></p>
-      <p><strong>Adults:</strong> <?php echo htmlspecialchars($booking['no_adults']); ?></p>
-      <p><strong>Children:</strong> <?php echo htmlspecialchars($booking['no_children']); ?></p>
-      <p><strong>Rooms:</strong> <?php echo htmlspecialchars($booking['no_rooms']); ?></p>
-      <p><strong>Room Charges:</strong> ₹<?php echo number_format($booking['total_price'], 2); ?></p>
-      <p><strong>Taxes (5%):</strong> ₹<?php echo number_format($booking['total_price'] * 0.05, 2); ?></p>
-      <p><strong>Total Amount:</strong> ₹<?php echo number_format($total_price); ?></p>
-      <p><strong>Payment ID:</strong> <?php echo isset($booking['payment_id']) ? htmlspecialchars($booking['payment_id']) : 'Not Available'; ?></p>
-      <p><strong>Payment Method:</strong> <?php echo isset($booking['payment_method']) ? htmlspecialchars($booking['payment_method']) : 'Not Paid'; ?></p>
-      <p><strong>Payment Status:</strong> <?php echo isset($booking['payment_status']) ? htmlspecialchars($booking['payment_status']) : 'Pending'; ?></p>
-      <p><strong>Paid Amount:</strong> ₹<?php echo number_format($total_price); ?></p>
+      <div style="max-width:600px;margin:50px auto;padding:30px;border:1px solid #ccc;border-radius:10px;">
+         <h2 style="color:#A66914;">Payment Confirmation</h2>
+         <p><strong>Payment ID:</strong> <?php echo $payment['payment_id']; ?></p>
+         <p><strong>Booking ID:</strong> <?php echo $payment['booking_id']; ?></p>
+         <p><strong>Customer Name:</strong> <?php echo $payment['customer_name']; ?></p>
+         <p><strong>Amount Paid:</strong> ₹<?php echo $payment['amount']; ?></p>
+         <p><strong>Payment Method:</strong> <?php echo $payment['payment_method']; ?></p>
+         <p><strong>Status:</strong> ✅ <?php echo $payment['payment_status']; ?></p>
+         <a href="profile.php" style="display:inline-block;margin-top:20px;background:#A66914;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none;">Back to Profile</a>
+      </div>
 
 
-      <form action="profile.php" method="POST">
-         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-         <input type="hidden" name="booking_id" value="<?php echo $booking['O_id']; ?>">
-         <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
-         <div class="btndiv">
-
-            <button type="submit" class="btn">Save</button>
-         </div>
-      </form>
 
 
 

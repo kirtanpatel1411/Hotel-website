@@ -2,7 +2,7 @@
 include '../db.php';
 include 'sidebar.php';
 
-$sql = "SELECT * FROM feedback ORDER BY created_at DESC";
+$sql = "SELECT * FROM feedback ";
 $result = $conn->query($sql);
 ?>
 
@@ -122,23 +122,19 @@ $result = $conn->query($sql);
 
         <table border="1">
             <tr>
+                <th>id</th>
+                <th>User_id</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Visit Date</th>
-                <th>Rating</th>
                 <th>Message</th>
-                <th>Date</th>
+
             </tr>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <tr>
+                    <td><?= $row['f_id'] ?></td>
+                    <td><?= $row['U_id'] ?></td>
                     <td><?= $row['name'] ?></td>
-                    <td><?= $row['email'] ?></td>
-                    <td><?= $row['phone'] ?></td>
-                    <td><?= $row['visit_date'] ? $row['visit_date'] : 'N/A' ?></td>
-                    <td><?= str_repeat("⭐", $row['rating']) ?></td>
                     <td><?= $row['message'] ?></td>
-                    <td><?= $row['created_at'] ?></td>
+
                 </tr>
             <?php } ?>
         </table>

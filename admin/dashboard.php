@@ -3,12 +3,15 @@ include 'sidebar.php';
 include '../db.php';
 
 
-$userQuery = "SELECT COUNT(*) as totalUsers FROM users";
+
+
+
+$userQuery = "SELECT COUNT(*) as totalUsers FROM registration";
 $userResult = $conn->query($userQuery);
 $userData = $userResult->fetch_assoc();
 $totalUsers = $userData['totalUsers'];
 
-$orderQuery = "SELECT COUNT(*) as totalOrders FROM booking";
+$orderQuery = "SELECT COUNT(*) as totalOrders FROM `order`";
 $orderResult = $conn->query($orderQuery);
 $orderData = $orderResult->fetch_assoc();
 $totalOrders = $orderData['totalOrders'];
@@ -66,7 +69,7 @@ $totalPayments = $paymentData['totalPayments'] ? $paymentData['totalPayments'] :
         }
 
         .card {
-            background:rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;

@@ -6,7 +6,7 @@ include 'db.php';
 include 'header.php';
 
 
-// $checkin = $checkout = $adults = $children = $rooms = "";
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 } 
 if(isset($_GET['price']) || isset($_POST['price'])) { 
    $price = isset($_GET['price']) ? $_GET['price'] : $_POST['price'];
-   // $price = $_GET['price'];
+ 
    $sql = "SELECT * FROM rooms WHERE price <= '$price'";
    $result = mysqli_query($conn, $sql);
 }else{
@@ -247,10 +247,7 @@ if(isset($_GET['price']) || isset($_POST['price'])) {
                <p>Rooms <span>*</span></p>
                <input type="number" class="input" name="rooms" value="<?php echo $no_rooms; ?>" required>
             </div>
-            <!-- <div class="box">
-               <p>price <span>*</span></p>
-               <input type="number" class="input" name="price" value="<?php //echo $price; ?>" required>
-            </div> -->
+         
          </form>
             <form action="room.php" method="POST">
             <div class="box">

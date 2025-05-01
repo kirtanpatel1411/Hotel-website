@@ -5,9 +5,9 @@ session_start();
 
 include 'db.php';
 
-// Fetch only valid offers (not expired)
-// $sql = "SELECT * FROM offers WHERE valid_until >= CURDATE() ORDER BY id DESC";
-// $result = $conn->query($sql);
+
+$sql = "SELECT * FROM offers WHERE valid_until >= CURDATE() ORDER BY o_id DESC";
+$result = $conn->query($sql);
 
 
 
@@ -48,17 +48,17 @@ include 'db.php';
          const popup = document.getElementById("offerPopup");
          const closeBtn = document.querySelector(".close-btn");
 
-         // Show popup when clicking the logo
+         
          logo.addEventListener("click", function() {
             popup.style.display = "flex";
          });
 
-         // Close popup when clicking "X"
+      
          closeBtn.addEventListener("click", function() {
             popup.style.display = "none";
          });
 
-         // Close popup when clicking outside content
+      
          window.addEventListener("click", function(event) {
             if (event.target === popup) {
                popup.style.display = "none";
@@ -487,7 +487,7 @@ include 'db.php';
             
                <p><?php echo htmlspecialchars($offer['description']); ?></p>
                
-               <p><strong>Valid Until:</strong> <?php echo htmlspecialchars($offer['valid_until']); ?></p>
+               <p style="color: red;"><strong>Valid Until:</strong> <?php echo htmlspecialchars($offer['valid_until']); ?></p>
                <hr>
             </div>
          <?php } ?>
@@ -538,7 +538,6 @@ include 'db.php';
    <div class="share">
       <a href="https://www.facebook.com/Courtyardsurat/" class="fab fa-facebook-f"></a>
       <a href="https://www.instagram.com/courtyardmarriottsurat/" class="fab fa-instagram"></a>
-      <!-- <a href="#" class="fab fa-twitter"></a> -->
       <a href="https://in.pinterest.com/pin/880664902127439501/" class="fab fa-pinterest"></a>
    </div>
 
@@ -547,23 +546,6 @@ include 'db.php';
 </section>
 
 <!-- end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 

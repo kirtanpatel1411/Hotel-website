@@ -4,23 +4,22 @@ include 'db.php';
 include 'header.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name     = $_POST['name'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // hashed password
+    $username     = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $city     = $_POST['city'];
     $address  = $_POST['address'];
     $email    = $_POST['email'];
     $phone    = $_POST['phone'];
+    $user_type = $_POST['user_type'];
 
-    // Check if email already exists
     $check_email = "SELECT * FROM registration WHERE email='$email'";
     $result = $conn->query($check_email);
 
     if ($result->num_rows > 0) {
         echo "<script>alert('Email already exists!'); window.location.href='register.php';</script>";
     } else {
-        // Insert user
-        $sql = "INSERT INTO registration (name, email, phone, city, address, password) 
-                VALUES ('$name', '$email', '$phone', '$city', '$address', '$password')";
+        $sql = "INSERT INTO registration (username, email, phone, city, address, password, user_type) 
+                VALUES ('$username', '$email', '$phone', '$city', '$address', '$password', '$user_type')";
         if ($conn->query($sql) === TRUE) {
             echo "<script>alert('Registration successful! Please login.'); window.location.href='login.php';</script>";
         } else {
@@ -49,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 100px);
             padding: 20px;
         }
 
@@ -58,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 550px;
             background: white;
             padding: 20px;
-            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             border: 2px solid black;
@@ -66,9 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         h2 {
             color: #A66914;
-            margin-bottom: 20px;
-            font-size: 50px;
-            border: 2px solid #A66914;
+            font-size: 40px;
         }
 
         form {
@@ -79,16 +74,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         label {
             text-align: left;
             font-size: 20px;
-            margin-top: 10px;
         }
 
         input {
             padding: 10px;
             margin: 5px 0;
             border: 1px solid black;
-            border-radius: 5px;
             width: 100%;
         }
+
+        .radio-group {
+            display: flex;
+            justify-content: flex-start;
+            gap: 30px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .row-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
 
         button {
             background: #A66914;
@@ -133,30 +160,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container">
             <h2>User Registration</h2>
             <form action="register.php" method="POST">
-    <label>Name:</label>
-    <input type="text" name="name" required>
 
-    <label>Email:</label>
-    <input type="email" name="email" required>
+                <label>User Type:</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="user_type" value="user" required checked>
+                        <span>User</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="user_type" value="admin" required>
+                        <span>Admin</span>
+                    </label>
+                </div>
 
-    <label>Phone:</label>
-    <input type="text" name="phone" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number">
+                <label>UserName:</label>
+                <input type="text" name="username" required>
 
-    <label>City:</label>
-    <input type="text" name="city" required>
+                <label>Email:</label>
+                <input type="email" name="email" required>
 
-    <label>Address:</label>
-    <input type="text" name="address" required>
+                <div class="row-group">
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" name="phone" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number">
+                    </div>
+                    <div class="form-group">
+                        <label>City:</label>
+                        <input type="text" name="city" required>
+                    </div>
+                </div>
+                <label>Address:</label>
+                <input type="text" name="address" required>
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
+                <label>Password:</label>
+                <input type="password" name="password" required>
 
-    <button type="submit">Register</button>
+                <button type="submit">Register</button>
 
-    <div class="link">
-        Already have an account? <a href="login.php">Login</a>
-    </div>
-</form>
+                <div class="link">
+                    Already have an account? <a href="login.php">Login</a>
+                </div>
+            </form>
 
         </div>
     </div>

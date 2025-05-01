@@ -17,21 +17,11 @@ $booking_id = $_POST['booking_id'];
 $total_price = $_POST['total_price'];
 $user_id = $_SESSION['user_id'];
 
-$user_sql = "SELECT * FROM users WHERE id = '$user_id'";
-$user_result = $conn->query($user_sql);
-$user = $user_result->fetch_assoc();
-
-if (!$user) {
-    echo "<script>alert('User not found!'); window.location.href='index.php';</script>";
-    exit();
-}
-
-
-$sql = "SELECT booking.*, payments.payment_method, payments.payment_id, rooms.name AS room_name 
-        FROM booking 
-        INNER JOIN payments ON booking.id = payments.booking_id 
-        INNER JOIN rooms ON booking.room_id = rooms.id
-        WHERE booking.id = '$booking_id' AND booking.user_id = '$user_id'";
+$sql = "SELECT `order`.*, payments.payment_method, payments.payment_id, rooms.room_type AS room_type 
+        FROM `order` 
+        INNER JOIN payments ON order.O_id = payments.booking_id 
+        INNER JOIN rooms ON order.room_id = rooms.r_id
+        WHERE order.O_id = '$booking_id' AND order.u_id = '$user_id'";
 
 $result = $conn->query($sql);
 
@@ -140,16 +130,16 @@ $booking = $result->fetch_assoc();
 
         <h2>Customer Details</h2>
         <div class="details-container">
-            <div><strong>Name:</strong> <span><?= htmlspecialchars($user['name']); ?></span></div>
-            <div><strong>Email:</strong> <span><?= htmlspecialchars($user['email']); ?></span></div>
-            <div><strong>Phone:</strong> <span><?= htmlspecialchars($user['phone']); ?></span></div>
+            <div><strong>Name:</strong> <span><?= htmlspecialchars($booking['customer_name']); ?></span></div>
+            <div><strong>Email:</strong> <span><?= htmlspecialchars($booking['email']); ?></span></div>
+            <div><strong>Phone:</strong> <span><?= htmlspecialchars($booking['phone']); ?></span></div>
         </div>
 
         <h2>Booking Details</h2>
         <div class="details-container">
             <div><strong>Check-In:</strong> <span><?= htmlspecialchars($booking['check_in']); ?></span></div>
             <div><strong>Check-Out:</strong> <span><?= htmlspecialchars($booking['check_out']); ?></span></div>
-            <div><strong>Room Name:</strong> <span><?= htmlspecialchars($booking['room_name']); ?></span></div>
+            <div><strong>Room Name:</strong> <span><?= htmlspecialchars($booking['room_type']); ?></span></div>
         </div>
 
         <h2>Payment Details</h2>

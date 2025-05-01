@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['u_id'];
-            $_SESSION['user_name'] = $row['name'];
+            $_SESSION['user_name'] = $row['username'];
 
             if (!empty($_GET['redirect'])) {
                 $redirect_url = $_GET['redirect'];
@@ -53,16 +53,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 100px);
             padding: 20px;
         }
 
 
         .container {
-            width: 550px;
+            width: 500px;
             background: white;
             padding: 20px;
-            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             border: 2px solid black;
@@ -71,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         h2 {
             color: #A66914;
             margin-bottom: 20px;
-            font-size: 45px;
-            border: 2px solid #8A5410;
+            font-size: 40px;
+
         }
 
         form {
@@ -90,7 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 10px;
             margin: 5px 0;
             border: 1px solid black;
-            border-radius: 5px;
             width: 100%;
         }
 
@@ -99,7 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: white;
             padding: 10px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
             font-size: 16px;

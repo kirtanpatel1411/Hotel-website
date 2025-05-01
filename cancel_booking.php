@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 $booking_id = $_POST['booking_id'];
 
 
-$sql = "UPDATE booking SET status = 'canceled' WHERE id = '$booking_id' AND user_id = '$user_id'";
+$sql = "DELETE  FROM `order` WHERE O_id = '$booking_id'";
 
 if ($conn->query($sql) === TRUE) {
     echo "<script>alert('Booking canceled successfully.'); window.location.href='profile.php';</script>";
