@@ -66,6 +66,7 @@
             <li onclick="window.location.href='manage_user.php'">Manage User</li>
             <li onclick="window.location.href='show_feedback.php'">Show Feedback</li>
             <li onclick="window.location.href='show_payment.php'">Show Payment</li>
+            <li onclick="window.location.href='admin_report.php'">Generate Report</li>
         </ul>
     </div>
 
